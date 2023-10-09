@@ -1,0 +1,37 @@
+.book-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.book-card {
+    height: 250px;
+    width: 150px;
+    background-color: rgb(185, 185, 185);
+    border-radius: 5px;
+    margin: 20px;
+    padding: 10px;
+
+    &:hover,
+    &:focus {
+        background-color: #97ab91;
+    }
+}
+
+.book-card.title {
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.book-card.author {
+    font-size: 10px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}

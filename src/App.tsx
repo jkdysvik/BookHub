@@ -2,32 +2,24 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import BookCard from './components/BookCard'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [books, setBooks] = useState([{ title: 'The Lord of the Rings', author: 'J.R.R. Tolkien' },
+  { title: 'Harry Potter', author: 'J.K. Rowling' },
+  { title: 'The Hobbit', author: 'J.R.R. Tolkien' },
+  { title: 'The Little Prince', author: 'Antoine de Saint-Exupéry' },
+  { title: 'Dream of the Red Chamber', author: 'Cao Xueqin' },  
+
+  ])
+
+
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="book-card-container">
+        {books.map((book) => (<BookCard title={book.title} author={book.author} />))}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
