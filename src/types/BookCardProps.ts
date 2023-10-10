@@ -3,5 +3,6 @@ export type BookCardProps = {
     title: string;
     author: string;
     year: number;
+    genre: string;
 };
 
