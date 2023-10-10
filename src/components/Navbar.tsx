@@ -25,9 +25,8 @@ export default function Navbar({ handleSearch }: NavbarProps) {
     return (
         <nav className="navbar-container">
             <img className="logo" src={logo} alt="logo" />
-            <button className="navbar-button">Home</button>
             <button className="navbar-button">Categories</button>
-            <button className="navbar-button">Favourites</button>
+            <button className="navbar-button">Readlist</button>
             <div className="search-bar">
                 <input
                     className="search-input"
