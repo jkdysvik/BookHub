@@ -1,9 +1,14 @@
 import { useState } from 'react'
 import './App.css'
+import Navbar from './components/Navbar'
 import BookCard from './components/BookCard'
 import { BookCardProps } from './types/BookCardProps'
 
 function App() {
+
+  const handleSearch = (query: string) => {
+    console.log(query)
+  }
 
   const initialBooks = [
     { title: 'The Lord of the Rings', author: 'J.R.R. Tolkien', year: 1954, rating: 4.5, genre: 'fantasy' },
@@ -52,6 +57,7 @@ function App() {
 
   return (
     <>
+      <Navbar handleSearch={handleSearch} />
 <div>
   <label htmlFor="genreSelect">Select genre:</label>
   <select id="genreSelect" onChange={selectGenre}>
@@ -75,7 +81,7 @@ function App() {
         {books.map((book) => (<BookCard title={book.title} author={book.author} year={book.year} rating={book.rating} genre={book.genre} />))}
       </div>
     </>
-  )
+  );
 }
 
 export default App
