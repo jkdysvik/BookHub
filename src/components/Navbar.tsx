@@ -2,16 +2,19 @@
 import "./Navbar.css";
 import { ChangeEvent, useState } from "react";
 import logo from "../assets/logo.png";
+import { useNavigate } from "react-router";
 
-type NavbarProps = {
-    handleSearch: (query: string) => void;
-};
-
-export default function Navbar({ handleSearch }: NavbarProps) {
+export default function Navbar() {
     const [query, setQuery] = useState<string>("");
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         setQuery(event.target.value);
+    };
+
+    const Navigate = useNavigate();
+
+    const handleSearch = (query: string) => {
+        Navigate("/book/" + query);
     };
 
     const handleSearchClick = () => {
