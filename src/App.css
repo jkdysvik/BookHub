@@ -40,3 +40,37 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Dropdown styles */
+select {
+  margin-left: 20px;
+  padding: 10px 15px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+select:focus {
+  border-color: #646cff;
+}
+select:hover {
+  border-color: #646cff;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #646cff;
+  color: black;
+  border-radius: 5px;
+  border: 1px solid black;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+button:hover {
+  border-color:  #646cff;
+}

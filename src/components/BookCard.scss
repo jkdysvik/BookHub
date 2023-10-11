@@ -8,29 +8,32 @@
 }
 
 .book-card {
-    height: 250px;
+    height: 300px;
+    transition: all .2s ease-in-out; 
     width: 150px;
-    background-color: rgb(185, 185, 185);
+    background-color: rgb(255, 255, 255);
     border-radius: 5px;
+    border-style: solid;
+    border-width: 3px;
     margin: 20px;
     padding: 10px;
 
     &:hover,
     &:focus {
-        background-color: #97ab91;
+        transform: scale(1.1);
     }
 }
 
 .book-card.title {
-    font-size: 12px;
+    font-size: 1px;
     font-weight: bold;
     text-align: center;
-    margin: 0;
+    margin-top: 0;
     padding: 0;
 }
 
 .book-card.author {
-    font-size: 10px;
+    font-size: 8px;
     text-align: center;
     margin: 0;
     padding: 0;
