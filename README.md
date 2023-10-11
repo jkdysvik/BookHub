@@ -1,27 +1,44 @@
-# React + TypeScript + Vite
+# BookHub
+BookHub is a web application that allows users to explore and discover books.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+## Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+In the folder prosjekt-2 run:
 
-## Expanding the ESLint configuration
+    npm install
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+To run the project:
 
-- Configure the top-level `parserOptions` property like this:
+    npm run dev
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+The project should now run locally. 
+
+
+## Features
+- Genre Selection: Browse books based on genres.
+
+- Sorting: Sort books by title, author, rating, or publication year.
+
+- Search: Search for books by title or author.
+
+
+## Roadmap
+
+- version 1:
+   - Objective: Display the visual interface without a backend.
+   - Key Features:
+Render the user interface to showcase the design and layout.
+
+- version 2: 
+   - Objective: Develop a fully functional application integrated with a backend.
+   - Key Features: Enable complete functionality with the support of a backend, ensuring smooth data operations.
+
+
+- version 3:
+   - Objective: Polish the application for a finished, high-quality product.
+   - Key Features:
+Implement testing for robustness and reliability.
+Enhance web accessibility for a broader user base.
+Optimize code for sustainability and maintainability.
