@@ -11,18 +11,18 @@ export default function Navbar() {
         setQuery(event.target.value);
     };
 
-    const Navigate = useNavigate();
-
-    const handleSearch = (query: string) => {
-        Navigate("/book/" + query);
-    };
+    const navigate = useNavigate();
 
     const handleSearchClick = () => {
         if (query.trim() !== "") {
-            handleSearch(query);
+          navigate(`/search?query=${query}`);
         }
+      };
+    const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter" && query.trim() !== "") {
+        navigate(`/search?query=${query}`);
+    }
     };
-
 
 
     return (
@@ -37,6 +37,7 @@ export default function Navbar() {
                     placeholder="Search..."
                     value={query}
                     onChange={handleInputChange}
+                    onKeyUp={handleKeyPress}
                 />
                 <button className="navbar-button" onClick={handleSearchClick}>Search</button>
             </div >
