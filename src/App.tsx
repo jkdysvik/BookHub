@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import Homepage from './pages/HomePage.tsx'
 import BookPage from './pages/BookPage.tsx'
 import Navbar from './components/Navbar'
+import SearchPage from './pages/SearchPage.tsx'
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/book/:book" element={<BookPage />} />
-        <Route path="/search/:query" element={<Homepage/>} />
+        <Route path="/search/" element={<SearchPage/>} />
       </Routes>
     </>
   )
