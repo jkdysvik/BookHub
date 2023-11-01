@@ -14,8 +14,8 @@ async function startServer() {
     const server = new apollo_server_express_1.ApolloServer({ typeDefs: typeDefs_1.default, resolvers: resolvers_1.default });
     mongoose_1.default.set("strictQuery", true);
     mongoose_1.default
-        .connect("mongodb://127.0.0.1:27017/books", {
-        dbName: "bookDB",
+        .connect("mongodb://127.0.0.1:27017/Books", {
+        dbName: "BookDB",
         retryWrites: true,
         w: "majority",
     })

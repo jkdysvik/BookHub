@@ -10,8 +10,8 @@ async function startServer() {
   const server = new ApolloServer({ typeDefs, resolvers });
   mongoose.set("strictQuery", true);
   mongoose
-    .connect("mongodb://127.0.0.1:27017/books", {
-      dbName: "bookDB",
+    .connect("mongodb://127.0.0.1:27017/Books", {
+      dbName: "BookDB",
       retryWrites: true,
       w: "majority",
     })
