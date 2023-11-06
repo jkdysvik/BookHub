@@ -6,16 +6,16 @@ import { useNavigate } from 'react-router';
 import { gql, useQuery } from '@apollo/client';
 
 // the query to get all books
-const BOOKS = gql`
-    query GetBooks {
-        books {
-        title
-        author
-        year
-        rating
-        }
-    }
-    `;
+// const BOOKS = gql`
+//     query GetBooks {
+//         books {
+//         title
+//         author
+//         year
+//         rating
+//         }
+//     }
+//     `;
 
 interface Book extends BookCardProps {
     onClick: (title: string) => void;
@@ -41,18 +41,18 @@ function HomePage() {
 
 
     // the useQuery hook is used to make a query to the backend
-    const { loading, error, data } = useQuery(BOOKS);
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error</p>;
-    console.log(data.books);
+    // const { loading, error, data } = useQuery(BOOKS);
+    // if (loading) return <p>Loading...</p>;
+    // if (error) return <p>Error</p>;
+    // console.log(data.books);
 
-    const bookys = data.books.map(({ title, author, year, rating }: Book) => (
-        <div key={title}>
-          <p>
-            {title}: {author} ({year}) {rating}
-          </p>
-        </div>
-      ));
+    // const books = data.books.map(({ title, author, year, rating , genre}: Book) => (
+    //     <div key={title}>
+    //       <p>
+    //         {title}: {author} ({year}) {rating} {genre}
+    //       </p>
+    //     </div>
+    //   ));
 
     const selectGenre = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const genre = e.target.value;
@@ -115,7 +115,6 @@ function HomePage() {
             <button onClick={handleReverse}>Reverse</button>
             <div className="book-card-container">
                 {books.map((book) => (<BookCard onClick={handleCardClick} title={book.title} author={book.author} year={book.year} rating={book.rating} genre={book.genre} />))}
-                <div> { bookys } </div>
             </div>
         </>
     );

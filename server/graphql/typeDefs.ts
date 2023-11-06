@@ -3,13 +3,15 @@ const typeDefs = `#graphql
     title: String
     author: String
     year: Int
-    rating: Int
+    rating: Float
+    genre: String
   }
   input BookInput {
     title: String
     author: String
     year: Int
-    rating: Int
+    rating: Float
+    genre: String
   }
 
   type Query {

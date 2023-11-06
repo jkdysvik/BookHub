@@ -17,7 +17,7 @@ const resolvers = {
     async createBook(
       _: any,
       {
-        input: { title, author, year, rating },
+        input: { title, author, year, rating, genre },
       }: { input: CreateBookInput }
     ) {
       const createdBook = new Book({
@@ -25,6 +25,7 @@ const resolvers = {
         author,
         year,
         rating,
+        genre,
       });
       // save the book to the database
       const res = await createdBook.save(); 
@@ -36,7 +37,7 @@ const resolvers = {
       _: any,
       {
         ID,
-        input: { title, author, year, rating },
+        input: { title, author, year, rating, genre },
       }: { ID: String; input: CreateBookInput }
     ) {
       const updatedBook = Book.findByIdAndUpdate(ID, {
@@ -44,6 +45,7 @@ const resolvers = {
         author,
         year,
         rating,
+        genre,
       });
 
       return updatedBook;
