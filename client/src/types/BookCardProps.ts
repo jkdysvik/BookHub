@@ -1,9 +1,10 @@
 export type BookCardProps = {
+    id: string;
     rating: number;
     title: string;
     author: string;
     year: number;
     genre: string;
-    onClick: (title: string) => void;
+    onClick: (id: string) => void;
 };
 
