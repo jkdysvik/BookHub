@@ -16,8 +16,8 @@ const resolvers = {
                 .limit(limit);
             return books;
         },
-        async book(_, { ID }) {
-            return await book_1.default.findById(ID);
+        async book(_, { _id }) {
+            return await book_1.default.findById(_id);
         },
     },
     Mutation: {

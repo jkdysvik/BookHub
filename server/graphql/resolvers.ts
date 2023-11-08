@@ -8,7 +8,7 @@ const resolvers = {
       if (genre) {
         query.genre = genre;
       }
-      
+
       // Apply limit and offset to the database query
       const books = await Book.find(query)
         .skip(offset) // Offset specifies how many documents to skip
@@ -16,8 +16,8 @@ const resolvers = {
       return books;
     },
     // returns a book by ID
-    async book(_: any, { ID }: { ID: string }) {
-      return await Book.findById(ID);
+    async book(_: any, { _id }: { _id: string }) {
+      return await Book.findById(_id);
     },
   },
   Mutation: {
@@ -36,7 +36,7 @@ const resolvers = {
         genre,
       });
       // save the book to the database
-      const res = await createdBook.save(); 
+      const res = await createdBook.save();
 
       return { id: res.id };
     },
