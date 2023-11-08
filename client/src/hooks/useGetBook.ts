@@ -1,20 +1,18 @@
-import { GET_BOOKS } from "../graphql/queries";
+import { GET_BOOK } from "../graphql/queries";
 import { request } from "graphql-request";
 import { useQuery } from "@tanstack/react-query";
 import { BookCardProps } from "../types/BookCardProps";
 
 
-export default function useGetBooks(chosenGenre?: string) {
+export default function useGetBook(bookId?: string) {
     const queryResult = useQuery({
-        queryKey: ["book", chosenGenre],
+        queryKey: ["book", bookId],
         queryFn: async () => {
-            const data = await request<{ books: BookCardProps[] }>(
+            const data = await request<{ book: BookCardProps }>(
                 "http://localhost:4000/graphql",
-                GET_BOOKS,
+                GET_BOOK,
                 {
-                    limit: 10,
-                    offset: 0,
-                    genre: chosenGenre,
+                    id: bookId,
                 },
             );
             return data;
@@ -22,4 +20,3 @@ export default function useGetBooks(chosenGenre?: string) {
     });
     return queryResult;
 }
-

@@ -17,7 +17,7 @@ const typeDefs = `#graphql
 
   type Query {
     books(limit: Int, offset: Int, genre: String): [Book]
-    book(ID: ID!): Book!
+    book(_id: ID!): Book!
   }
 
   type Mutation {
