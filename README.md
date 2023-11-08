@@ -4,12 +4,15 @@ BookHub is a web application that allows users to explore and discover books.
 
 ## Installation
 
-In the folder prosjekt-2 run:
+Navigate to prosjekt-2/backend and run:
 
     npm install
+    npm run dev:server
+    
 
-To run the project:
+Navigate to prosjekt-2/client and run
 
+    npm install
     npm run dev
 
 
