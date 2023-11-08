@@ -23,11 +23,14 @@ export default function Navbar() {
         navigate(`/project2/search?query=${query}`);
     }
     };
+    const handleLogoClick = () => {
+        navigate("/project2/");
+    }
 
 
     return (
         <nav className="navbar-container">
-            <img className="logo" src={logo} alt="logo" />
+            <img onClick={handleLogoClick} className="logo" src={logo} alt="logo" />
             <button className="navbar-button">Categories</button>
             <button className="navbar-button">Readlist</button>
             <div className="search-bar">
