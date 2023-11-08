@@ -3,56 +3,69 @@ import '../App.css';
 import BookCard from '../components/BookCard';
 import { BookCardProps } from '../types/BookCardProps';
 import { useNavigate } from 'react-router';
-import { useLocation } from "react-router-dom";
+import { gql, useQuery } from '@apollo/client';
 
+// the query to get all books
+const BOOKS = gql`
+query GetBooks($limit: Int, $offset: Int, $genre: String) {
+    books(limit: $limit, offset: $offset, genre: $genre) {
+      title
+      author
+      year
+      rating
+      genre
+    }
+  }
+    `;
 
 interface Book extends BookCardProps {
     onClick: (title: string) => void;
 }
 
-export const SearchPage: React.FC = () => {
+function HomePage() {
     const navigate = useNavigate();
+    // const handleSearch = (query: string) => {
+    //     console.log(query);
+    // };
 
-    const initialBooks: Book[] = [
-        { title: 'The Lord of the Rings', author: 'J.R.R. Tolkien', year: 1954, rating: 4.5, genre: 'fantasy', onClick: () => { } },
-        { title: 'Harry Potter', author: 'J.K. Rowling', year: 1997, rating: 4.8, genre: 'fantasy', onClick: () => { } },
-        { title: 'The Hobbit', author: 'J.R.R. Tolkien', year: 1937, rating: 5, genre: 'fantasy', onClick: () => { } },
-        { title: 'The Little Prince', author: 'Antoine de Saint-Exupéry', year: 1943, rating: 4.3, genre: 'fiction', onClick: () => { } },
-        { title: 'Dream of the Red Chamber', author: 'Cao Xueqin', year: 1791, rating: 4.1, genre: 'romance', onClick: () => { } }
-    ];
-
-
-    const [books, setBooks] = useState(initialBooks);
-
-    const location = useLocation();
-    const queryParams = new URLSearchParams(location.search);
-    const query = queryParams.get("query") || "";
-
+    const [books, setBooks] = useState<Book[]>([]);
+    const [chosenGenre, setChosenGenre] = useState<string>('Fantasy');
+    // the useQuery hook is used to make a query to the backend
+    const { loading, error, data } = useQuery(BOOKS, {
+        variables: {
+            limit: 10,
+            offset: 0,
+            genre: chosenGenre,
+        },
+    });
+    // set the books state to the data returned from the query
+    useEffect(() => {
+        if (data) {
+            setBooks(data.books);
+        }
+    }, [data]);
 
     useEffect(() => {
-        const filteredBooks = initialBooks.filter((book) =>
-            book.title.toLowerCase().includes(query.toLowerCase()) || book.author.toLowerCase().includes(query.toLowerCase()) || book.genre.toLowerCase().includes(query.toLowerCase()) || book.year.toString().includes(query.toLowerCase()) || book.rating.toString().includes(query.toLowerCase())
-        );
-        setBooks(filteredBooks);
-    }, [query, initialBooks]);
+        // search again with the new genre
+        // const newBooks = data.books.filter((book: { genre: string; }) => book.genre.toLowerCase() === chosenGenre);
+    }, [chosenGenre]);
 
     const selectGenre = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const genre = e.target.value;
         if (genre === 'all') {
-            setBooks(initialBooks);
+            setBooks(data.books);
         } else {
-            const newBooks = initialBooks.filter((book) => book.genre === genre);
-            setBooks(newBooks);
+            // const newBooks = data.books.filter((book: { genre: string; }) => book.genre.toLowerCase() === genre);
+            // setBooks(newBooks);
+            setChosenGenre(genre);
         }
     };
 
     const orderBy = (property: keyof BookCardProps) => {
         const newBooks = [...books];
-
         newBooks.sort((a, b) => {
             const valueA = a[property];
             const valueB = b[property];
-
             if (valueA > valueB) {
                 return 1;
             } else if (valueA < valueB) {
@@ -61,7 +74,6 @@ export const SearchPage: React.FC = () => {
                 return 0;
             }
         });
-
         setBooks(newBooks);
     };
 
@@ -74,6 +86,8 @@ export const SearchPage: React.FC = () => {
         navigate('/book/' + title);
     };
 
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error {error.message}</p>;
     return (
         <>
             <div>
@@ -101,5 +115,4 @@ export const SearchPage: React.FC = () => {
         </>
     );
 }
-
-export default SearchPage;
+export default HomePage;
