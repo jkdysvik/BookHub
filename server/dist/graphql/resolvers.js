@@ -6,30 +6,39 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const book_1 = __importDefault(require("../models/book"));
 const resolvers = {
     Query: {
-        async books() {
-            return await book_1.default.find();
+        async books(_, { limit, offset, genre }) {
+            const query = {};
+            if (genre) {
+                query.genre = genre;
+            }
+            const books = await book_1.default.find(query)
+                .skip(offset)
+                .limit(limit);
+            return books;
         },
         async book(_, { ID }) {
             return await book_1.default.findById(ID);
         },
     },
     Mutation: {
-        async createBook(_, { input: { title, author, year, rating }, }) {
+        async createBook(_, { input: { title, author, year, rating, genre }, }) {
             const createdBook = new book_1.default({
                 title,
                 author,
                 year,
                 rating,
+                genre,
             });
             const res = await createdBook.save();
             return { id: res.id };
         },
-        async updateBook(_, { ID, input: { title, author, year, rating }, }) {
+        async updateBook(_, { ID, input: { title, author, year, rating, genre }, }) {
             const updatedBook = book_1.default.findByIdAndUpdate(ID, {
                 title,
                 author,
                 year,
                 rating,
+                genre,
             });
             return updatedBook;
         },

@@ -5,17 +5,19 @@ const typeDefs = `#graphql
     title: String
     author: String
     year: Int
-    rating: Int
+    rating: Float
+    genre: String
   }
   input BookInput {
     title: String
     author: String
     year: Int
-    rating: Int
+    rating: Float
+    genre: String
   }
 
   type Query {
-    books: [Book]
+    books(limit: Int, offset: Int, genre: String): [Book]
     book(ID: ID!): Book!
   }
 

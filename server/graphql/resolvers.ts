@@ -3,9 +3,17 @@ import { CreateBookInput } from "../types";
 
 const resolvers = {
   Query: {
-    // returns all books
-    async books() {
-      return await Book.find();
+    async books(_: any, { limit, offset, genre }: { limit: number, offset: number, genre: string }) {
+      const query: any = {};
+      if (genre) {
+        query.genre = genre;
+      }
+      
+      // Apply limit and offset to the database query
+      const books = await Book.find(query)
+        .skip(offset) // Offset specifies how many documents to skip
+        .limit(limit); // Limit specifies the maximum number of documents to return
+      return books;
     },
     // returns a book by ID
     async book(_: any, { ID }: { ID: string }) {

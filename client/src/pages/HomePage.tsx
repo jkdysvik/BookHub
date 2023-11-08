@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../App.css';
 import BookCard from '../components/BookCard';
 import { BookCardProps } from '../types/BookCardProps';
@@ -6,16 +6,17 @@ import { useNavigate } from 'react-router';
 import { gql, useQuery } from '@apollo/client';
 
 // the query to get all books
-// const BOOKS = gql`
-//     query GetBooks {
-//         books {
-//         title
-//         author
-//         year
-//         rating
-//         }
-//     }
-//     `;
+const BOOKS = gql`
+query GetBooks($limit: Int, $offset: Int, $genre: String) {
+    books(limit: $limit, offset: $offset, genre: $genre) {
+      title
+      author
+      year
+      rating
+      genre
+    }
+  }
+    `;
 
 interface Book extends BookCardProps {
     onClick: (title: string) => void;
@@ -37,30 +38,39 @@ function HomePage() {
         { title: 'Dream of the Red Chamber', author: 'Cao Xueqin', year: 1791, rating: 4.1, genre: 'romance', onClick: () => {} }
     ];
 
-    const [books, setBooks] = useState(initialBooks);
+    const [books, setBooks] = useState<Book[]>([]);
+    const [chosenGenre, setChosenGenre] = useState<string>('Fantasy');
 
-
+   
     // the useQuery hook is used to make a query to the backend
-    // const { loading, error, data } = useQuery(BOOKS);
-    // if (loading) return <p>Loading...</p>;
-    // if (error) return <p>Error</p>;
-    // console.log(data.books);
+    const { loading, error, data } = useQuery(BOOKS, {
+        variables: {
+          limit: 10,
+          offset: 0,
+          genre: chosenGenre,  
+        },
+      });
 
-    // const books = data.books.map(({ title, author, year, rating , genre}: Book) => (
-    //     <div key={title}>
-    //       <p>
-    //         {title}: {author} ({year}) {rating} {genre}
-    //       </p>
-    //     </div>
-    //   ));
+    // set the books state to the data returned from the query  
+    useEffect(() => {
+        if (data) {
+            setBooks(data.books);
+          }
+      }, [data]);
+
+    useEffect(() => {
+        // search again with the new genre
+        // const newBooks = data.books.filter((book: { genre: string; }) => book.genre.toLowerCase() === chosenGenre);
+    }, [chosenGenre]);
 
     const selectGenre = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const genre = e.target.value;
         if (genre === 'all') {
-            setBooks(initialBooks);
+            setBooks(data.books);
         } else {
-            const newBooks = initialBooks.filter((book) => book.genre === genre);
-            setBooks(newBooks);
+            // const newBooks = data.books.filter((book: { genre: string; }) => book.genre.toLowerCase() === genre);
+            // setBooks(newBooks);
+            setChosenGenre(genre);
         }
     };
 
@@ -91,6 +101,9 @@ function HomePage() {
     const handleCardClick = (title: string) => {
         navigate('/book/' + title);
     };
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error {error.message}</p>;
 
     return (
         <>

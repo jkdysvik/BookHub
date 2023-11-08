@@ -1,11 +1,8 @@
-import express from "express";
-import { ApolloServer } from "apollo-server-express";
+import { ApolloServer } from "@apollo/server";
+import { startStandaloneServer } from "@apollo/server/standalone";
 import mongoose from "mongoose";
 import resolvers from "./graphql/resolvers";
 import typeDefs from "./graphql/typeDefs";
-import "dotenv/config";
-const port = process.env.PORT || 3000;
-
 async function startServer() {
   const server = new ApolloServer({ typeDefs, resolvers });
   mongoose.set("strictQuery", true);
@@ -18,17 +15,10 @@ async function startServer() {
     .then(() => {
       console.log("connected");
     })
-    .catch((e) => console.log(e));
-
-  await server.start();
-
-  const app = express();
-
-  server.applyMiddleware({ app: app, path: "/graphql" });
-
-  app.listen(port, () => {
-    console.log(`Apollo Server on http://localhost:${port}/graphql`);
+    .catch((e) => console.log("Not connected", e));
+  const { url } = await startStandaloneServer(server, {
+    listen: { port: 4000 },
   });
+  console.log(`:rocket:  Server ready at: ${url}`);
 }
-
 startServer();
