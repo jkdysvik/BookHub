@@ -18,10 +18,11 @@ function HomePage() {
 
     const [books, setBooks] = useState<Book[]>([]);
     const [chosenGenre, setChosenGenre] = useState<string>('');
+    const [offset, setOffset] = useState<number>(0);
 
 
 
-    const { error, data, isLoading } = useGetBooks(chosenGenre);
+    const { error, data, isLoading } = useGetBooks(offset, chosenGenre);
 
     // set the books state to the data returned from the query  
 
@@ -80,8 +81,6 @@ function HomePage() {
                     <option value="Romance">Romance</option>
                 </select>
             </div>
-            <div onClick={() => console.log(data)}>asdfasdfasdfasdfasdf</div>
-            <div onClick={() => console.log(chosenGenre)}>print genre</div>
 
 
 
@@ -97,6 +96,12 @@ function HomePage() {
             <button onClick={handleReverse}>Reverse</button>
             <div className="book-card-container">
                 {data?.books.map((book) => (<BookCard onClick={handleCardClick} title={book.title} author={book.author} year={book.year} rating={book.rating} genre={book.genre} id={book._id} />))}
+            </div>
+            <div className='scrolling-container'>
+                {offset >= 10 && (
+                    <button onClick={() => setOffset(offset - 10)}>Previous</button>
+                )}
+                <button onClick={() => setOffset(offset + 10)}>Next</button>
             </div>
         </>
     );
