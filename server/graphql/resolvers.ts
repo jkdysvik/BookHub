@@ -44,8 +44,8 @@ const resolvers = {
       }
     },
     // returns a book by ID
-    async book(_: any, { ID }: { ID: string }) {
-      return await Book.findById(ID);
+    async book(_: any, { _id }: { _id: string }) {
+      return await Book.findById(_id);
     },
   },
   Mutation: {
@@ -64,7 +64,7 @@ const resolvers = {
         genre,
       });
       // save the book to the database
-      const res = await createdBook.save(); 
+      const res = await createdBook.save();
 
       return { id: res.id };
     },
