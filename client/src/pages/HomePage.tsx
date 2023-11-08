@@ -9,6 +9,7 @@ import { gql, useQuery } from '@apollo/client';
 const BOOKS = gql`
 query GetBooks($limit: Int, $offset: Int, $genre: String) {
     books(limit: $limit, offset: $offset, genre: $genre) {
+      _id
       title
       author
       year
@@ -19,7 +20,7 @@ query GetBooks($limit: Int, $offset: Int, $genre: String) {
     `;
 
 interface Book extends BookCardProps {
-    onClick: (title: string) => void;
+    onClick: (id: string) => void;
 }
 
 function HomePage() {
@@ -86,8 +87,9 @@ function HomePage() {
         setBooks(newBooks);
     };
 
-    const handleCardClick = (title: string) => {
-        navigate('/project2/book/' + title);
+    const handleCardClick = (id: string) => {
+        console.log(id);
+        navigate('/project2/book/' + id);
     };
 
     if (loading) return <p>Loading...</p>;
@@ -115,7 +117,7 @@ function HomePage() {
             </div>
             <button onClick={handleReverse}>Reverse</button>
             <div className="book-card-container">
-                {books.map((book) => (<BookCard onClick={handleCardClick} title={book.title} author={book.author} year={book.year} rating={book.rating} genre={book.genre} />))}
+                {books.map((book) => (<BookCard onClick={handleCardClick} title={book.title} author={book.author} year={book.year} rating={book.rating} genre={book.genre} id={book._id} />))}
             </div>
         </>
     );

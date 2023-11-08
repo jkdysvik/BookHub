@@ -20,7 +20,7 @@
     "express": "^4.18.2",
     "graphql": "^16.8.1",
     "mongodb": "^6.2.0",
-    "mongoose": "^7.6.3",
+    "mongoose": "^7.6.4",
     "nodemon": "^2.0.22"
   }
 }

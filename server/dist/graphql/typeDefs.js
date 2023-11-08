@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeDefs = `#graphql
   type Book {
+    _id: ID!
     title: String
     author: String
     year: Int
