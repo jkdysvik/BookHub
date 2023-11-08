@@ -15,12 +15,12 @@ export default function Navbar() {
 
     const handleSearchClick = () => {
         if (query.trim() !== "") {
-          navigate(`/search?query=${query}`);
+          navigate(`/project2/search?query=${query}`);
         }
       };
     const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && query.trim() !== "") {
-        navigate(`/search?query=${query}`);
+        navigate(`/project2/search?query=${query}`);
     }
     };
 

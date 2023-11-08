@@ -87,7 +87,7 @@ function HomePage() {
     };
 
     const handleCardClick = (title: string) => {
-        navigate('/book/' + title);
+        navigate('/project2/book/' + title);
     };
 
     if (loading) return <p>Loading...</p>;
