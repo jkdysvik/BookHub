@@ -96,11 +96,7 @@ function HomePage() {
             </div>
             <button onClick={handleReverse}>Reverse</button>
             <div className="book-card-container">
-<<<<<<< HEAD
-                {books.map((book) => (<BookCard onClick={handleCardClick} title={book.title} author={book.author} year={book.year} rating={book.rating} genre={book.genre} id={book._id} />))}
-=======
                 {data?.books.map((book) => (<BookCard onClick={handleCardClick} title={book.title} author={book.author} year={book.year} rating={book.rating} genre={book.genre} />))}
->>>>>>> 1bfddd0 (Genre filtration working)
             </div>
         </>
     );
