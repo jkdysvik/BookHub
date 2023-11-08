@@ -19,6 +19,11 @@ const resolvers = {
     async book(_: any, { ID }: { ID: string }) {
       return await Book.findById(ID);
     },
+    //returns books with title containing the search string
+    async booksearch(_: any, { title }: { title: string }) {
+      const books = await Book.find({ title: { $regex: title, $options: "i" } });
+      return books;
+    },
   },
   Mutation: {
     // creates a new book
