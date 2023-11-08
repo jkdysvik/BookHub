@@ -6,15 +6,45 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const book_1 = __importDefault(require("../models/book"));
 const resolvers = {
     Query: {
-        async books(_, { limit, offset, genre }) {
+        async books(_, { limit, offset, genre, orderBy }) {
             const query = {};
             if (genre) {
                 query.genre = genre;
             }
-            const books = await book_1.default.find(query)
-                .skip(offset)
-                .limit(limit);
-            return books;
+            if (orderBy === 'rating') {
+                const books = await book_1.default.find(query)
+                    .skip(offset)
+                    .limit(limit)
+                    .sort({ rating: -1 });
+                return books;
+            }
+            else if (orderBy === 'year') {
+                const books = await book_1.default.find(query)
+                    .skip(offset)
+                    .limit(limit)
+                    .sort({ year: -1 });
+                return books;
+            }
+            else if (orderBy === 'author') {
+                const books = await book_1.default.find(query)
+                    .skip(offset)
+                    .limit(limit)
+                    .sort({ author: 1 });
+                return books;
+            }
+            else if (orderBy === 'title') {
+                const books = await book_1.default.find(query)
+                    .skip(offset)
+                    .limit(limit)
+                    .sort({ title: 1 });
+                return books;
+            }
+            else {
+                const books = await book_1.default.find(query)
+                    .skip(offset)
+                    .limit(limit);
+                return books;
+            }
         },
         async book(_, { _id }) {
             return await book_1.default.findById(_id);

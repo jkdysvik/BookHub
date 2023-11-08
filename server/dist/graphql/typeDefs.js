@@ -18,7 +18,7 @@ const typeDefs = `#graphql
   }
 
   type Query {
-    books(limit: Int, offset: Int, genre: String): [Book]
+    books(limit: Int, offset: Int, genre: String, orderBy: String): [Book]
     book(_id: ID!): Book!
   }
 

@@ -3,18 +3,19 @@ import { request } from "graphql-request";
 import { useQuery } from "@tanstack/react-query";
 import { BookCardProps } from "../types/BookCardProps";
 
-
-export default function useGetBooks(offset: number, chosenGenre: string) {
+export default function useGetBooks(offset: number, chosenGenre: string, chosenOrder: string) {
     const queryResult = useQuery({
-        queryKey: ["book", { offset, chosenGenre }],
+        queryKey: ["book", { offset, chosenGenre, chosenOrder }],
         queryFn: async () => {
             const data = await request<{ books: BookCardProps[] }>(
+                // Change this to the virtual machine's IP address if pushing to vm
                 "http://localhost:4000/graphql",
                 GET_BOOKS,
                 {
                     limit: 10,
                     offset: offset,
                     genre: chosenGenre,
+                    orderBy: chosenOrder,
                 },
             );
             return data;
@@ -22,4 +23,3 @@ export default function useGetBooks(offset: number, chosenGenre: string) {
     });
     return queryResult;
 }
-

@@ -19,48 +19,28 @@ function HomePage() {
     const [books, setBooks] = useState<Book[]>([]);
     const [chosenGenre, setChosenGenre] = useState<string>('');
     const [offset, setOffset] = useState<number>(0);
+    const [chosenOrder, setChosenOrder] = useState<string>('title');
 
 
 
-    const { error, data, isLoading } = useGetBooks(offset, chosenGenre);
+    const { error, data, isLoading } = useGetBooks(offset, chosenGenre, chosenOrder);
 
     // set the books state to the data returned from the query  
 
 
     const selectGenre = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const genre = e.target.value;
-        if (genre === 'all') {
-            // setBooks(data.books);
+        if (genre === 'All') {
+            setChosenGenre('');
         } else {
-            // const newBooks = data.books.filter((book: { genre: string; }) => book.genre.toLowerCase() === genre);
-            // setBooks(newBooks);
             setChosenGenre(genre);
         }
     };
 
     const orderBy = (property: keyof BookCardProps) => {
-        const newBooks = [...books];
-
-        newBooks.sort((a, b) => {
-            const valueA = a[property];
-            const valueB = b[property];
-
-            if (valueA > valueB) {
-                return 1;
-            } else if (valueA < valueB) {
-                return -1;
-            } else {
-                return 0;
-            }
-        });
-
-        setBooks(newBooks);
+        setChosenOrder(property);
     };
 
-    const handleReverse = () => {
-        const newBooks = [...books].reverse(); // Reverse the array
-        setBooks(newBooks);
-    };
 
     const handleCardClick = (id: string) => {
         console.log(id);
@@ -93,7 +73,6 @@ function HomePage() {
                     <option value="year">Year</option>
                 </select>
             </div>
-            <button onClick={handleReverse}>Reverse</button>
             <div className="book-card-container">
                 {data?.books.map((book) => (<BookCard onClick={handleCardClick} title={book.title} author={book.author} year={book.year} rating={book.rating} genre={book.genre} id={book._id} />))}
             </div>
