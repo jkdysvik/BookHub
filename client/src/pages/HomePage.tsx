@@ -25,38 +25,26 @@ interface Book extends BookCardProps {
 function HomePage() {
     const navigate = useNavigate();
 
-    const handleSearch = (query: string) => {
-        console.log(query);
-    };
-
-
-    const initialBooks: Book[] = [
-        { title: 'The Lord of the Rings', author: 'J.R.R. Tolkien', year: 1954, rating: 4.5, genre: 'fantasy', onClick: () => {} },
-        { title: 'Harry Potter', author: 'J.K. Rowling', year: 1997, rating: 4.8, genre: 'fantasy', onClick: () => {} },
-        { title: 'The Hobbit', author: 'J.R.R. Tolkien', year: 1937, rating: 5, genre: 'fantasy', onClick: () => {} },
-        { title: 'The Little Prince', author: 'Antoine de Saint-Exupéry', year: 1943, rating: 4.3, genre: 'fiction', onClick: () => {} },
-        { title: 'Dream of the Red Chamber', author: 'Cao Xueqin', year: 1791, rating: 4.1, genre: 'romance', onClick: () => {} }
-    ];
 
     const [books, setBooks] = useState<Book[]>([]);
     const [chosenGenre, setChosenGenre] = useState<string>('Fantasy');
 
-   
+
     // the useQuery hook is used to make a query to the backend
     const { loading, error, data } = useQuery(BOOKS, {
         variables: {
-          limit: 10,
-          offset: 0,
-          genre: chosenGenre,  
+            limit: 10,
+            offset: 0,
+            genre: chosenGenre,
         },
-      });
+    });
 
     // set the books state to the data returned from the query  
     useEffect(() => {
         if (data) {
             setBooks(data.books);
-          }
-      }, [data]);
+        }
+    }, [data]);
 
     useEffect(() => {
         // search again with the new genre

@@ -6,10 +6,6 @@ import { useNavigate } from 'react-router';
 import { useLocation } from "react-router-dom";
 
 
-interface Props {
-    query: string;
-  }
-
 interface Book extends BookCardProps {
     onClick: (title: string) => void;
 }
@@ -18,14 +14,14 @@ export const SearchPage: React.FC = () => {
     const navigate = useNavigate();
 
     const initialBooks: Book[] = [
-        { title: 'The Lord of the Rings', author: 'J.R.R. Tolkien', year: 1954, rating: 4.5, genre: 'fantasy', onClick: () => {} },
-        { title: 'Harry Potter', author: 'J.K. Rowling', year: 1997, rating: 4.8, genre: 'fantasy', onClick: () => {} },
-        { title: 'The Hobbit', author: 'J.R.R. Tolkien', year: 1937, rating: 5, genre: 'fantasy', onClick: () => {} },
-        { title: 'The Little Prince', author: 'Antoine de Saint-Exupéry', year: 1943, rating: 4.3, genre: 'fiction', onClick: () => {} },
-        { title: 'Dream of the Red Chamber', author: 'Cao Xueqin', year: 1791, rating: 4.1, genre: 'romance', onClick: () => {} }
+        { title: 'The Lord of the Rings', author: 'J.R.R. Tolkien', year: 1954, rating: 4.5, genre: 'fantasy', onClick: () => { } },
+        { title: 'Harry Potter', author: 'J.K. Rowling', year: 1997, rating: 4.8, genre: 'fantasy', onClick: () => { } },
+        { title: 'The Hobbit', author: 'J.R.R. Tolkien', year: 1937, rating: 5, genre: 'fantasy', onClick: () => { } },
+        { title: 'The Little Prince', author: 'Antoine de Saint-Exupéry', year: 1943, rating: 4.3, genre: 'fiction', onClick: () => { } },
+        { title: 'Dream of the Red Chamber', author: 'Cao Xueqin', year: 1791, rating: 4.1, genre: 'romance', onClick: () => { } }
     ];
 
-    
+
     const [books, setBooks] = useState(initialBooks);
 
     const location = useLocation();
@@ -35,10 +31,10 @@ export const SearchPage: React.FC = () => {
 
     useEffect(() => {
         const filteredBooks = initialBooks.filter((book) =>
-          book.title.toLowerCase().includes(query.toLowerCase()) || book.author.toLowerCase().includes(query.toLowerCase()) || book.genre.toLowerCase().includes(query.toLowerCase()) || book.year.toString().includes(query.toLowerCase()) || book.rating.toString().includes(query.toLowerCase())
+            book.title.toLowerCase().includes(query.toLowerCase()) || book.author.toLowerCase().includes(query.toLowerCase()) || book.genre.toLowerCase().includes(query.toLowerCase()) || book.year.toString().includes(query.toLowerCase()) || book.rating.toString().includes(query.toLowerCase())
         );
         setBooks(filteredBooks);
-      }, [query, initialBooks]);
+    }, [query, initialBooks]);
 
     const selectGenre = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const genre = e.target.value;
