@@ -3,17 +3,45 @@ import { CreateBookInput } from "../types";
 
 const resolvers = {
   Query: {
-    async books(_: any, { limit, offset, genre }: { limit: number, offset: number, genre: string }) {
+    async books(_: any, { limit, offset, genre, orderBy }: { limit: number, offset: number, genre: string, orderBy: string }) {
       const query: any = {};
       if (genre) {
         query.genre = genre;
       }
-      
-      // Apply limit and offset to the database query
-      const books = await Book.find(query)
+      if (orderBy==='rating') {
+        const books = await Book.find(query)
+        .skip(offset) // Offset specifies how many documents to skip
+        .limit(limit)
+        .sort({ rating: -1 }); // Limit specifies the maximum number of documents to return
+      return books;
+      }
+      else if (orderBy==='year') {
+        const books = await Book.find(query)
+        .skip(offset) // Offset specifies how many documents to skip
+        .limit(limit)
+        .sort({ year: -1 }); // Limit specifies the maximum number of documents to return
+      return books;
+      }
+      else if (orderBy==='author') {
+        const books = await Book.find(query)
+        .skip(offset) // Offset specifies how many documents to skip
+        .limit(limit)
+        .sort({ author: 1 }); // Limit specifies the maximum number of documents to return
+      return books;
+      }
+      else if (orderBy==='title') {
+        const books = await Book.find(query)
+        .skip(offset) // Offset specifies how many documents to skip
+        .limit(limit)
+        .sort({ title: 1 }); // Limit specifies the maximum number of documents to return
+      return books;
+      }
+      else{
+        const books = await Book.find(query)
         .skip(offset) // Offset specifies how many documents to skip
         .limit(limit); // Limit specifies the maximum number of documents to return
       return books;
+      }
     },
     // returns a book by ID
     async book(_: any, { ID }: { ID: string }) {

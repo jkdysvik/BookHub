@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router';
 import useGetBooks from '../hooks/useGetBooks';
 
 
-
 interface Book extends BookCardProps {
     onClick: (id: string) => void;
 }
@@ -14,55 +13,32 @@ interface Book extends BookCardProps {
 function HomePage() {
     const navigate = useNavigate();
 
-
-
-    const [books, setBooks] = useState<Book[]>([]);
     const [chosenGenre, setChosenGenre] = useState<string>('');
+    const [chosenOrder, setChosenOrder] = useState<string>('');
 
 
-
-    const { error, data, isLoading } = useGetBooks(chosenGenre);
-
-    // set the books state to the data returned from the query  
-
+    const { error, data, isLoading } = useGetBooks(chosenGenre, chosenOrder);
 
     const selectGenre = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const genre = e.target.value;
         if (genre === 'all') {
-            // setBooks(data.books);
+            setChosenGenre('');
         } else {
-            // const newBooks = data.books.filter((book: { genre: string; }) => book.genre.toLowerCase() === genre);
-            // setBooks(newBooks);
             setChosenGenre(genre);
-        }
+        }   
     };
 
     const orderBy = (property: keyof BookCardProps) => {
-        const newBooks = [...books];
-
-        newBooks.sort((a, b) => {
-            const valueA = a[property];
-            const valueB = b[property];
-
-            if (valueA > valueB) {
-                return 1;
-            } else if (valueA < valueB) {
-                return -1;
-            } else {
-                return 0;
-            }
-        });
-
-        setBooks(newBooks);
+        setChosenOrder(property);
     };
 
-    const handleReverse = () => {
-        const newBooks = [...books].reverse(); // Reverse the array
-        setBooks(newBooks);
-    };
+    // Needs to be implemented 
+    // const handleReverse = () => {
+    //     const newBooks = [...books].reverse(); // Reverse the array
+    //     setBooks(newBooks);
+    // };
 
     const handleCardClick = (id: string) => {
-        console.log(id);
         navigate('/project2/book/' + id);
     };
 
@@ -80,11 +56,6 @@ function HomePage() {
                     <option value="Romance">Romance</option>
                 </select>
             </div>
-            <div onClick={() => console.log(data)}>asdfasdfasdfasdfasdf</div>
-            <div onClick={() => console.log(chosenGenre)}>print genre</div>
-
-
-
             <div>
                 <label htmlFor="orderBySelect">Order by:</label>
                 <select onChange={(e) => orderBy(e.target.value as keyof BookCardProps)}>
@@ -94,9 +65,9 @@ function HomePage() {
                     <option value="year">Year</option>
                 </select>
             </div>
-            <button onClick={handleReverse}>Reverse</button>
+            {/* <button onClick={handleReverse}>Reverse</button> */}
             <div className="book-card-container">
-                {data?.books.map((book) => (<BookCard onClick={handleCardClick} title={book.title} author={book.author} year={book.year} rating={book.rating} genre={book.genre} />))}
+                {data?.books.map((book) => (<BookCard onClick={handleCardClick} title={book.title} author={book.author} year={book.year} rating={book.rating} genre={book.genre} id={book.id} />))}
             </div>
         </>
     );
