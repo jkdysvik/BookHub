@@ -23,6 +23,9 @@ export const GET_BOOK = gql`
       year
       rating
       genre
+      description
+      pages
+      language
     }
   }
 `;

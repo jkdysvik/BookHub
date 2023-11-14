@@ -8,6 +8,9 @@ const bookSchema = new mongoose.Schema({
   year: { type: Number, required: true, trim: true },
   rating: { type: Number, required: true, trim: true },
   genre: { type: String, required: true, trim: true },
+  description: { type: String, required: true, trim: true },
+  pages: { type: Number, required: false, trim: true },
+  language: { type: String, required: false, trim: true },
 });
 // export default mongoose.model<BookType & mongoose.Document>("Book", bookSchema);
 // For the parsing
@@ -25,6 +28,15 @@ mongoose.connect('mongodb://localhost:27017/BookDB', {
 fs.createReadStream('books.csv')
   .pipe(csv())
   .on('data', (row) => {
+
+    const description = row.description.replace(/'/g, '"');
+    // console.log(description);
+
+    const pages = row.pages;
+    console.log(typeof(pages));
+
+    const language = row.language.replace(/'/g, '"');
+    console.log(language);
     // Transform and insert data into the database
     const date = row.publishDate.split(" ");
     let year = date[date.length - 1];
@@ -40,7 +52,10 @@ fs.createReadStream('books.csv')
       author: row.author,
       year: parseInt(year),
       rating: parseFloat(row.rating),
-      genre: genre
+      genre: genre,
+      description: description,
+      pages: parseInt(pages),
+      language: language,
     };
     async function InsertBook() {
       try {

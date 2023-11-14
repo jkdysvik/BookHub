@@ -52,7 +52,7 @@ const resolvers = {
     async createBook(
       _: any,
       {
-        input: { title, author, year, rating, genre },
+        input: { title, author, year, rating, genre, description, pages, language },
       }: { input: CreateBookInput }
     ) {
       const createdBook = new Book({
@@ -61,6 +61,9 @@ const resolvers = {
         year,
         rating,
         genre,
+        description,
+        pages,
+        language,
       });
       // save the book to the database
       const res = await createdBook.save();

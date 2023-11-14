@@ -7,6 +7,9 @@ export interface BookType extends Document {
   year: number;
   rating: number;
   genre: string;
+  description: string;
+  pages: number;
+  language: string;
 }
 
 export interface CreateBookInput {
@@ -15,4 +18,7 @@ export interface CreateBookInput {
   year: number;
   rating: number;
   genre: string;
+  description: string;
+  pages: number;
+  language: string;
 }
