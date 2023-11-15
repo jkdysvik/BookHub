@@ -3,9 +3,9 @@ import { AiFillStar } from 'react-icons/ai'
 import './BookCard.scss';
 import { BookCardProps } from '../types/BookCardProps';
 
-const BookCard = ({ id, title, author, year, rating, genre, onClick }: BookCardProps) => {
+const BookCard = ({ _id, title, author, year, rating, genre, onClick }: BookCardProps) => {
     const handleClick = () => {
-        onClick(id);
+        onClick(_id);
     };
     
     if(title.length > 20){
