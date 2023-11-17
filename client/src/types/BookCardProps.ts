@@ -1,5 +1,5 @@
 export type BookCardProps = {
-    id: string;
+    _id: string;
     rating: number;
     title: string;
     author: string;

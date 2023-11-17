@@ -6,16 +6,11 @@ import { useNavigate } from 'react-router';
 import useGetBooks from '../hooks/useGetBooks';
 
 
-
-interface Book extends BookCardProps {
-    onClick: (id: string) => void;
-}
-
 function HomePage() {
     const navigate = useNavigate();
 
 
-    const [order, setOrder] = useState<string>('rating');
+
     const [chosenGenre, setChosenGenre] = useState<string>('');
     const [offset, setOffset] = useState<number>(0);
     const [chosenOrder, setChosenOrder] = useState<string>('rating');
@@ -78,7 +73,7 @@ function HomePage() {
                 </select>
             </div>
             <div className="book-card-container">
-                {data?.books.map((book) => (<BookCard onClick={handleCardClick} title={book.title} author={book.author} year={book.year} rating={book.rating} genre={book.genre} id={book._id} />))}
+                {data?.books.map((book) => (<BookCard onClick={() => handleCardClick(book._id)} title={book.title} author={book.author} year={book.year} rating={book.rating} genre={book.genre} _id={book._id} />))}
             </div>
             <div className='scrolling-container'>
                 {offset >= 10 && (

@@ -9,6 +9,7 @@ export default function useGetBooks(offset: number, chosenGenre: string, chosenO
         queryFn: async () => {
             const data = await request<{ books: BookCardProps[] }>(
                 // Change this to the virtual machine's IP address if pushing to vm
+                // "http://it2810-24.idi.ntnu.no:4000/",
                 "http://localhost:4000/graphql",
                 GET_BOOKS,
                 {
