@@ -110,7 +110,7 @@ function HomePage() {
             </div>
             <button onClick={handleReverse}>Reverse</button>
             <div className="book-card-container">
-                {books.map((book) => (<BookCard onClick={handleCardClick} title={book.title} author={book.author} year={book.year} rating={book.rating} genre={book.genre} _id={book._id} />))}
+                {books.map((book) => (<BookCard onClick={handleCardClick} title={book.title} author={book.author} year={book.year} rating={book.rating} genre={book.genre} _id={book._id} description={''} pages={0} language={''} />))}
             </div>
         </>
     );
