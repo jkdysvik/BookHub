@@ -8,6 +8,9 @@ const typeDefs = `#graphql
     year: Int
     rating: Float
     genre: String
+    description: String
+    pages: Int
+    language: String
   }
   input BookInput {
     title: String
@@ -15,6 +18,9 @@ const typeDefs = `#graphql
     year: Int
     rating: Float
     genre: String
+    description: String
+    pages: Int
+    language: String
   }
 
   type Query {

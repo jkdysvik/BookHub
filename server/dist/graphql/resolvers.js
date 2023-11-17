@@ -51,13 +51,14 @@ const resolvers = {
         },
     },
     Mutation: {
-        async createBook(_, { input: { title, author, year, rating, genre }, }) {
+        async createBook(_, { input: { title, author, year, rating, genre, description }, }) {
             const createdBook = new book_1.default({
                 title,
                 author,
                 year,
                 rating,
                 genre,
+                description,
             });
             const res = await createdBook.save();
             return { id: res.id };

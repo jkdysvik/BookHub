@@ -13,7 +13,7 @@ function HomePage() {
 
     const [chosenGenre, setChosenGenre] = useState<string>('');
     const [offset, setOffset] = useState<number>(0);
-    const [chosenOrder, setChosenOrder] = useState<string>('title');
+    const [chosenOrder, setChosenOrder] = useState<string>('rating');
 
 
 
@@ -23,6 +23,7 @@ function HomePage() {
 
 
     const selectGenre = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        e.preventDefault();
         const genre = e.target.value;
         if (genre === 'All') {
             setChosenGenre('');
@@ -33,6 +34,7 @@ function HomePage() {
 
     const orderBy = (property: keyof BookCardProps) => {
         setChosenOrder(property);
+        setOrder(property);
     };
 
 
@@ -48,11 +50,14 @@ function HomePage() {
         <>
             <div>
                 <label htmlFor="genreSelect">Select genre:</label>
-                <select id="genreSelect" onChange={selectGenre}>
+                <select value={chosenGenre} id="genreSelect" onChange={selectGenre}>
                     <option value="">All</option>
                     <option value="Fantasy">Fantasy</option>
                     <option value="Fiction">Fiction</option>
                     <option value="Romance">Romance</option>
+                    <option value="History">History</option>
+                    <option value="Historical Fiction">Historical fiction</option>
+                    <option value="Science">Science</option>
                 </select>
             </div>
 
@@ -60,7 +65,7 @@ function HomePage() {
 
             <div>
                 <label htmlFor="orderBySelect">Order by:</label>
-                <select onChange={(e) => orderBy(e.target.value as keyof BookCardProps)}>
+                <select value={order} onChange={(e) => orderBy(e.target.value as keyof BookCardProps)}>
                     <option value="title">Title</option>
                     <option value="author">Author</option>
                     <option value="rating">Rating</option>

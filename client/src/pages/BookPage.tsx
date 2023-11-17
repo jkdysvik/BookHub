@@ -4,8 +4,6 @@ import useGetBook from "../hooks/useGetBook";
 
 function BookPage() {
   const { bookId } = useParams(); // Ensure this matches the URL parameter
-  console.log(bookId)
-  console.log(typeof bookId)
 
   const { isLoading, error, data } = useGetBook(bookId);
 
@@ -13,7 +11,6 @@ function BookPage() {
   if (error) return <p>Error :</p>;
 
   const book = data?.book;
-
   return (
     <div>
       <h1>{book?.title}</h1>
@@ -22,6 +19,9 @@ function BookPage() {
         <p>Year: {book?.year}</p>
         <p>Rating: {book?.rating}</p>
         <p>Genre: {book?.genre}</p>
+        {book?.description && <p>Description: {book?.description}</p>}
+        {book?.pages && <p>Pages: {book?.pages}</p>}
+        {book?.language && <p>Language: {book?.language}</p>}
       </div>
     </div>
 

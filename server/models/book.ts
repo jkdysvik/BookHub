@@ -7,6 +7,9 @@ const bookSchema = new mongoose.Schema({
   year: { type: Number, required: true, trim: true },
   rating: { type: Number, required: true, trim: true },
   genre: { type: String, required: true, trim: true },
+  description: { type: String, required: false, trim: true },
+  pages: { type: Number, required: false, trim: true },
+  language: { type: String, required: false, trim: true },
 });
 
 export default mongoose.model<BookType & mongoose.Document>("Book", bookSchema);
