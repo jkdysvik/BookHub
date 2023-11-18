@@ -3,6 +3,7 @@ import { ChangeEvent, useState } from "react";
 import logo from "../assets/logo.png";
 import { useNavigate } from "react-router";
 import SearchIcon from '@mui/icons-material/Search';
+import BookmarksIcon from '@mui/icons-material/Bookmarks';
 
 export default function Navbar() {
     const [query, setQuery] = useState<string>("");
@@ -43,11 +44,14 @@ export default function Navbar() {
 
                 />
                 <button className="navbar-button" onClick={handleSearchClick}>
-                    <SearchIcon style={{ height: '20px' }} />
-                    Search
+                    <SearchIcon />
+                    <span className="navbar-button-label">Search</span>
                 </button>
             </div>
-            <button className="navbar-button">Readlist</button>
-        </nav>
+            <button className="navbar-button">
+                <BookmarksIcon />
+                <span className="navbar-button-label">Readlist</span>
+            </button>
+        </nav >
     );
 }
