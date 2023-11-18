@@ -3,6 +3,7 @@ import useGetBook from "../hooks/useGetBook";
 import "./BookPage.scss";
 import { useState } from "react";
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
+import StarIcon from '@mui/icons-material/Star';
 
 function BookPage() {
   const { bookId } = useParams();
@@ -39,6 +40,7 @@ function BookPage() {
         <div className="bookpage-info-field">
           <div style={{ fontWeight: 'bold', marginRight: '5px' }}>Rating:</div>
           <div style={{ marginLeft: '5px' }}>{book?.rating}</div>
+          <StarIcon style={{ fontSize: 'medium', marginLeft: '5px', color: '#35633b' }} />
         </div>
         <div className="bookpage-info-field">
           <div style={{ fontWeight: 'bold', marginRight: '5px' }}>Genre:</div>
