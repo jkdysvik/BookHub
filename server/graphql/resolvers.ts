@@ -46,6 +46,46 @@ const resolvers = {
     async book(_: any, { _id }: { _id: string }) {
       return await Book.findById(_id);
     },
+    async searchBooks(_: any, { query, limit }: { query: string, limit: number }) {
+      const regSearch = new RegExp(query, 'i');
+  
+      // Books that start with the query
+      const regStart = new RegExp('^' + query, 'i');
+
+      // Sorts with the books that start with the query first
+      const books = await Book.aggregate([
+        {
+          $match: {
+            $or: [
+              { title: { $regex: regSearch } },
+              { author: { $regex: regSearch } },
+            ],
+          },
+        },
+        {
+          $addFields: {
+            startsWith: {
+              $cond: [
+                { $or: [{ $regexMatch: { input: '$title', regex: regStart } },
+                { $regexMatch: { input: '$author', regex: regStart } }] },
+            1,
+            0,
+              ],
+            },
+          },
+        },
+        {
+          $sort: {
+            startsWith: -1,
+            title: 1,
+          },
+        },
+        { $limit: limit },
+      ]);
+
+      return books;
+    },
+
   },
   Mutation: {
     // creates a new book
