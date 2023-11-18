@@ -49,9 +49,43 @@ const resolvers = {
         async book(_, { _id }) {
             return await book_1.default.findById(_id);
         },
+        async searchBooks(_, { query, limit }) {
+            const regSearch = new RegExp(query, 'i');
+            const regStart = new RegExp('^' + query, 'i');
+            const books = await book_1.default.aggregate([
+                {
+                    $match: {
+                        $or: [
+                            { title: { $regex: regSearch } },
+                            { author: { $regex: regSearch } },
+                        ],
+                    },
+                },
+                {
+                    $addFields: {
+                        startsWith: {
+                            $cond: [
+                                { $or: [{ $regexMatch: { input: '$title', regex: regStart } },
+                                        { $regexMatch: { input: '$author', regex: regStart } }] },
+                                1,
+                                0,
+                            ],
+                        },
+                    },
+                },
+                {
+                    $sort: {
+                        startsWith: -1,
+                        title: 1,
+                    },
+                },
+                { $limit: limit },
+            ]);
+            return books;
+        },
     },
     Mutation: {
-        async createBook(_, { input: { title, author, year, rating, genre, description }, }) {
+        async createBook(_, { input: { title, author, year, rating, genre, description, pages, language }, }) {
             const createdBook = new book_1.default({
                 title,
                 author,
@@ -59,6 +93,8 @@ const resolvers = {
                 rating,
                 genre,
                 description,
+                pages,
+                language,
             });
             const res = await createdBook.save();
             return { id: res.id };

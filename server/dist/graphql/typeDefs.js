@@ -26,6 +26,7 @@ const typeDefs = `#graphql
   type Query {
     books(limit: Int, offset: Int, genre: String, orderBy: String): [Book]
     book(_id: ID!): Book!
+    searchBooks(query: String, limit: Int): [Book]
   }
 
   type Mutation {
