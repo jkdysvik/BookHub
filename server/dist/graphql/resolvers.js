@@ -49,17 +49,21 @@ const resolvers = {
         async book(_, { _id }) {
             return await book_1.default.findById(_id);
         },
-        async searchBooks(_, { query, limit }) {
+        async searchBooks(_, { query, limit, offset, genre, orderBy }) {
             const regSearch = new RegExp(query, 'i');
             const regStart = new RegExp('^' + query, 'i');
+            const match = {
+                $or: [
+                    { title: { $regex: regSearch } },
+                    { author: { $regex: regSearch } },
+                ],
+            };
+            if (genre && genre.trim() !== '') {
+                match.genre = { $eq: genre };
+            }
             const books = await book_1.default.aggregate([
                 {
-                    $match: {
-                        $or: [
-                            { title: { $regex: regSearch } },
-                            { author: { $regex: regSearch } },
-                        ],
-                    },
+                    $match: match,
                 },
                 {
                     $addFields: {
@@ -75,10 +79,11 @@ const resolvers = {
                 },
                 {
                     $sort: {
-                        startsWith: -1,
-                        title: 1,
+                        ...(orderBy === 'title' ? { startsWith: -1 } : {}),
+                        [orderBy]: orderBy === 'rating' || orderBy === 'year' ? -1 : 1,
                     },
                 },
+                { $skip: offset },
                 { $limit: limit },
             ]);
             return books;

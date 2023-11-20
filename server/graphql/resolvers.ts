@@ -46,21 +46,28 @@ const resolvers = {
     async book(_: any, { _id }: { _id: string }) {
       return await Book.findById(_id);
     },
-    async searchBooks(_: any, { query, limit }: { query: string, limit: number }) {
+    async searchBooks(_: any, { query, limit, offset, genre, orderBy }: { query: string, limit: number, offset: number, genre: string, orderBy: string }) {
       const regSearch = new RegExp(query, 'i');
   
       // Books that start with the query
       const regStart = new RegExp('^' + query, 'i');
 
+      const match: any = {
+        $or: [
+          { title: { $regex: regSearch } },
+          { author: { $regex: regSearch } },
+        ],
+      };
+  
+      // Conditionally add the genre filter if it's not an empty string
+      if (genre && genre.trim() !== '') {
+         match.genre = { $eq: genre };
+      }
+
       // Sorts with the books that start with the query first
       const books = await Book.aggregate([
         {
-          $match: {
-            $or: [
-              { title: { $regex: regSearch } },
-              { author: { $regex: regSearch } },
-            ],
-          },
+          $match: match,
         },
         {
           $addFields: {
@@ -76,10 +83,11 @@ const resolvers = {
         },
         {
           $sort: {
-            startsWith: -1,
-            title: 1,
+            ...(orderBy === 'title' ? { startsWith: -1 } : {}),
+            [orderBy]: orderBy === 'rating' || orderBy === 'year' ? -1 : 1,
           },
         },
+        { $skip: offset },
         { $limit: limit },
       ]);
 

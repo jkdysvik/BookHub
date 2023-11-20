@@ -5,6 +5,7 @@ import Navbar from './components/Navbar'
 import SearchPage from './pages/SearchPage.tsx'
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { SearchProvider } from './hooks/searchContext.tsx'
 
 
 
@@ -14,13 +15,15 @@ function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <Navbar />
-        <Routes>
-          <Route path="/project2/" element={<Homepage />} />
-          <Route path="/project2/book/:bookId" element={<BookPage />} />
-          <Route path="/project2/search/" element={<SearchPage />} />
-        </Routes>
-        <ReactQueryDevtools initialIsOpen={false} />
+      <SearchProvider>
+          <Navbar/>
+          <Routes>
+            <Route path="/project2/" element={<Homepage />} />
+            <Route path="/project2/book/:bookId" element={<BookPage />} />
+            <Route path="/project2/search/" element={<SearchPage />} />
+          </Routes>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </SearchProvider>
       </QueryClientProvider>
     </>
   )
