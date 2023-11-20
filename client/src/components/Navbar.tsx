@@ -3,9 +3,11 @@ import "./Navbar.css";
 import { ChangeEvent, useState } from "react";
 import logo from "../assets/logo.png";
 import { useNavigate } from "react-router";
+import { useSearch } from "../hooks/searchContext";
 
 export default function Navbar() {
     const [query, setQuery] = useState<string>("");
+    const { searchQuery, setSearchQuery } = useSearch();
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         setQuery(event.target.value);
@@ -13,20 +15,25 @@ export default function Navbar() {
 
     const navigate = useNavigate();
 
-    const handleSearchClick = () => {
+    const handleSearchClick = async () => {
         if (query.trim() !== "") {
-          navigate(`/project2/search?query=${query}`);
+        setSearchQuery(query);
         }
       };
+
     const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && query.trim() !== "") {
-        navigate(`/project2/search?query=${query}`);
+        setSearchQuery(query);
     }
     };
     const handleLogoClick = () => {
         navigate("/project2/");
     }
 
+    const handleRemoveSearch = () => {
+        setQuery('');
+        setSearchQuery('');
+    }
 
     return (
         <nav className="navbar-container">
@@ -42,7 +49,10 @@ export default function Navbar() {
                     onChange={handleInputChange}
                     onKeyUp={handleKeyPress}
                 />
-                <button className="navbar-button" onClick={handleSearchClick}>Search</button>
+                {searchQuery ? (
+                    <button className="navbar-button" onClick={handleRemoveSearch}> remove search</button>
+                ) : null}
+                <button className="navbar-button" onClick={handleSearchClick}>Search</button>   
             </div >
         </nav>
     );
