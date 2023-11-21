@@ -75,19 +75,20 @@ function BookPage() {
   });
 
 
-  const { isLoading, error, data } = useGetBook(bookId);
+  //const { isLoading, error, data } = useGetBook(bookId);
+  const { data } = useGetBook(bookId);
   //const { isLoading: isLoadingReviews, error: errorReviews, data: dataReviews } = useGetReviews(bookId);
  // if (isLoadingReviews) return <p>Loading...</p>;
   //if (errorReviews) return <p>Error :</p>;
 
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error :</p>;
+  //if (isLoading) return <p>Loading...</p>;
+  //if (error) return <p>Error :</p>;
   console.log(typeof(bookId))
-  //const { data: dataReviews } = useGetReviews(bookId);
+  const { data: dataReviews } = useGetReviews(bookId);
   // if (reviewIsLoading) return <p>Loading...</p>;
   // if (reviewError) return <p>Error :</p>;
 
-  //console.log(dataReviews)
+  console.log(dataReviews)
   
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -127,6 +128,7 @@ function BookPage() {
 
 
   const book = data?.book;
+  //const review = dataReviews?.reviews;
   return (
     <div>
       <h1>{book?.title}</h1>
@@ -140,16 +142,16 @@ function BookPage() {
         {book?.language && <p>Language: {book?.language}</p>}
       </div>
       <div id="reviewDiv">
-        {/* <h2>Reviews</h2>
+        <h2>Reviews</h2>
         <div id="reviewList">
-          {dataReviews?.reviews.map((review) => (
+          {dataReviews?.bookReviews.map((review) => (
             <div className="review" key={review._id}>
               <p>Rating: {review.rating}</p>
               <p>Review: {review.review}</p>
               <p>Reviewer: {review.username}</p>
             </div>
           ))}
-        </div> */}
+        </div>
         <div id="addReview">
           <h2>Add review</h2>
           <form onSubmit={
