@@ -1,6 +1,7 @@
 import "./Navbar.scss";
 import { ChangeEvent, useState } from "react";
 import logo from "../assets/logo.png";
+import logosmall from "../assets/logo-small.png";
 import { useNavigate } from "react-router";
 import SearchIcon from '@mui/icons-material/Search';
 import BookmarksIcon from '@mui/icons-material/Bookmarks';
@@ -42,6 +43,7 @@ export default function Navbar() {
     return (
         <nav className="navbar-container">
             <img onClick={handleLogoClick} className="logo" src={logo} alt="logo" />
+            <img onClick={handleLogoClick} className="logo-small" src={logosmall} alt="logo" />
             <div className="search-bar">
                 <input
                     className="search-input"
