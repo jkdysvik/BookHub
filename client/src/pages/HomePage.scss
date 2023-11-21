@@ -22,6 +22,10 @@
     height: auto;
     width: 500px;
     margin: 20px;
+
+    @media (max-width: 768px) {
+        width: 250px;
+    }
 }
 
 .homepage-logo1 {
@@ -29,6 +33,10 @@
     width: 500px;
     margin: 20px;
     animation: bounceAndMoveAndRotate 2s infinite;
+
+    @media (max-width: 768px) {
+        width: 250px;
+    }
 }
 
 .homepage-logo2 {
@@ -36,6 +44,10 @@
     width: 500px;
     margin: 20px;
     animation: floatAnimation 2s infinite;
+
+    @media (max-width: 768px) {
+        width: 250px;
+    }
 }
 
 .homepage-logo3 {
@@ -43,6 +55,10 @@
     width: 500px;
     margin: 20px;
     animation: crazyAnimation 4s infinite;
+
+    @media (max-width: 768px) {
+        width: 250px;
+    }
 }
 
 .homepage-scrolling-container {
