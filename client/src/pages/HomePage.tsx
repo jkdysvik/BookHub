@@ -117,13 +117,6 @@ function HomePage() {
         <>
             <div className="home-page-container">
                 <div>
-                    Viewport width: {viewportSize.width}px
-                </div>
-                <div>
-                    Viewport height: {viewportSize.height}px
-                </div>
-
-                <div>
                     <label htmlFor="genreSelect">Select genre:</label>
                     <select value={chosenGenre} id="genreSelect" onChange={selectGenre}>
                         <option value="">All</option>
