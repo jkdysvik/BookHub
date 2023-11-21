@@ -76,20 +76,19 @@ function BookPage() {
   });
 
   const [showFullDescription, setShowFullDescription] = useState(false);
-  const { isLoading, error, data } = useGetBook(bookId);
+  const { data } = useGetBook(bookId);
   const { data: dataReviews } = useGetReviews(bookId);
   //const { isLoading: isLoadingReviews, error: errorReviews, data: dataReviews } = useGetReviews(bookId);
  // if (isLoadingReviews) return <p>Loading...</p>;
   //if (errorReviews) return <p>Error :</p>;
 
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error :</p>;
+  //if (isLoading) return <p>Loading...</p>;
+  //if (error) return <p>Error :</p>;
   console.log(typeof(bookId))
-  //const { data: dataReviews } = useGetReviews(bookId);
   // if (reviewIsLoading) return <p>Loading...</p>;
   // if (reviewError) return <p>Error :</p>;
 
-  //console.log(dataReviews)
+  console.log(dataReviews)
   
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -192,7 +191,6 @@ function BookPage() {
             </div>
           ))}
         </div>
-
         <div id="addReview">
           <h2>Add review</h2>
           <form onSubmit={
