@@ -25,7 +25,7 @@ function HomePage() {
     });
 
     const { error, data, isLoading } = searchQuery
-        ? useGetSearchBooks(searchQuery, offset, chosenGenre, chosenOrder)
+        ? useGetSearchBooks(searchQuery, offset, chosenGenre, chosenOrder, limit)
         : useGetBooks(offset, chosenGenre, chosenOrder, limit);
 
 
@@ -173,7 +173,12 @@ function HomePage() {
                         <button className="homepage-scroll-button" onClick={() => setOffset(offset - limit)}><ArrowBackIcon fontSize='small' />Previous</button>
                     )}
                     <div className="homepage-index">{Math.floor(offset / limit)}</div>
-                    < button className="homepage-scroll-button" onClick={() => setOffset(offset + limit)}>Next <ArrowForwardIcon fontSize='small' /></button>
+                    {((data?.books && data.books.length === limit) || ((data as unknown as { searchBooks: BookCardProps[] }).searchBooks && (data as unknown as { searchBooks: BookCardProps[] }).searchBooks.length === limit)) && (
+                        <button className="homepage-scroll-button" onClick={() => setOffset(offset + limit)}>
+                            Next <ArrowForwardIcon fontSize='small' />
+                        </button>
+                    )}
+
                 </div>
             </div>
         </>
