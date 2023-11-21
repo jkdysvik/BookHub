@@ -8,13 +8,37 @@
     max-width: 1600px;
 }
 
-.home-page-container {
+.homepage-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 40px auto;
     background-color: #fff;
-    padding: 20px;
     text-align: center;
+}
+
+.homepage-scrolling-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+}
+
+.homepage-scrolling-container>* {
+    margin: 0 10px;
+}
+
+.homepage-scroll-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.homepage-index {
+    color: #35633b;
+    font-weight: bold;
 }
