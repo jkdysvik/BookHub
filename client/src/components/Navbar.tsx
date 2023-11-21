@@ -1,4 +1,4 @@
-import "./Navbar.css";
+import "./Navbar.scss";
 import { ChangeEvent, useState } from "react";
 import logo from "../assets/logo.png";
 import { useNavigate } from "react-router";
