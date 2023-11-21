@@ -103,7 +103,13 @@ function HomePage() {
     }, [searchQuery]);
 
     useEffect(() => {
-        if (viewportSize.width > 1296 && viewportSize.width < 1512) {
+        if (viewportSize.width < 864) {
+            setLimit(6);
+        }
+        else if (viewportSize.width < 1080 && viewportSize.width > 864) {
+            setLimit(8);
+        }
+        else if (viewportSize.width > 1296 && viewportSize.width < 1512) {
             setLimit(12);
         }
         else if (viewportSize.width > 1512) {
