@@ -1,5 +1,6 @@
 import Book from "../models/book";
-import { CreateBookInput } from "../types";
+import Review from "../models/review";
+import { CreateBookInput, CreateBookReviewInput } from "../types";
 const resolvers = {
   Query: {
     async books(_: any, { limit, offset, genre, orderBy }: { limit: number, offset: number, genre: string, orderBy: string }) {
@@ -94,6 +95,9 @@ const resolvers = {
       return books;
     },
 
+    async bookReviews(_: any, { bookID }: { bookID: string }) {
+      return await Review.find({ bookID });
+    },
   },
   Mutation: {
     // creates a new book
@@ -139,6 +143,22 @@ const resolvers = {
       const wasDeleted = await Book.findById(ID).deleteOne();
       return wasDeleted;
     },
+    // creates review for a book
+    async createReview(
+      _:any,
+      {
+        input: { bookID, username, rating, review },
+      } : { input: CreateBookReviewInput }
+    ) { 
+      const createdReview = new Review({
+        bookID,
+        username,
+        rating,
+        review,
+      });
+      const res = await createdReview.save();
+      return { id: res.id };
+    }
   },
 };
 export default resolvers;
