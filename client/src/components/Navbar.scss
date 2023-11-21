@@ -7,6 +7,8 @@
     align-items: center;
     justify-content: space-between;
     align-self: flex-start;
+    position: fixed;
+    z-index: 1000;
 
     @media (max-width: 768px) {
         justufy-content: center;
