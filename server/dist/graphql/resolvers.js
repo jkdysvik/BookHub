@@ -49,9 +49,48 @@ const resolvers = {
         async book(_, { _id }) {
             return await book_1.default.findById(_id);
         },
+        async searchBooks(_, { query, limit, offset, genre, orderBy }) {
+            const regSearch = new RegExp(query, 'i');
+            const regStart = new RegExp('^' + query, 'i');
+            const match = {
+                $or: [
+                    { title: { $regex: regSearch } },
+                    { author: { $regex: regSearch } },
+                ],
+            };
+            if (genre && genre.trim() !== '') {
+                match.genre = { $eq: genre };
+            }
+            const books = await book_1.default.aggregate([
+                {
+                    $match: match,
+                },
+                {
+                    $addFields: {
+                        startsWith: {
+                            $cond: [
+                                { $or: [{ $regexMatch: { input: '$title', regex: regStart } },
+                                        { $regexMatch: { input: '$author', regex: regStart } }] },
+                                1,
+                                0,
+                            ],
+                        },
+                    },
+                },
+                {
+                    $sort: {
+                        ...(orderBy === 'title' ? { startsWith: -1 } : {}),
+                        [orderBy]: orderBy === 'rating' || orderBy === 'year' ? -1 : 1,
+                    },
+                },
+                { $skip: offset },
+                { $limit: limit },
+            ]);
+            return books;
+        },
     },
     Mutation: {
-        async createBook(_, { input: { title, author, year, rating, genre, description }, }) {
+        async createBook(_, { input: { title, author, year, rating, genre, description, pages, language }, }) {
             const createdBook = new book_1.default({
                 title,
                 author,
@@ -59,6 +98,8 @@ const resolvers = {
                 rating,
                 genre,
                 description,
+                pages,
+                language,
             });
             const res = await createdBook.save();
             return { id: res.id };

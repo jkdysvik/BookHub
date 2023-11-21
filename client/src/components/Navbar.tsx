@@ -4,9 +4,12 @@ import logo from "../assets/logo.png";
 import { useNavigate } from "react-router";
 import SearchIcon from '@mui/icons-material/Search';
 import BookmarksIcon from '@mui/icons-material/Bookmarks';
+import ClearIcon from '@mui/icons-material/Clear';
+import { useSearch } from "../hooks/searchContext";
 
 export default function Navbar() {
     const [query, setQuery] = useState<string>("");
+    const { searchQuery, setSearchQuery } = useSearch();
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         setQuery(event.target.value);
@@ -14,20 +17,26 @@ export default function Navbar() {
 
     const navigate = useNavigate();
 
-    const handleSearchClick = () => {
+    const handleSearchClick = async () => {
         if (query.trim() !== "") {
-            navigate(`/project2/search?query=${query}`);
+        setSearchQuery(query);
         }
-    };
+      };
 
     const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === "Enter" && query.trim() !== "") {
-            navigate(`/project2/search?query=${query}`);
-        }
+    if (event.key === "Enter" && query.trim() !== "") {
+        setSearchQuery(query);
+    }
     };
+
 
     const handleLogoClick = () => {
         navigate("/project2/");
+    }
+
+    const handleRemoveSearch = () => {
+        setQuery('');
+        setSearchQuery('');
     }
 
     return (
@@ -43,6 +52,11 @@ export default function Navbar() {
                     onKeyUp={handleKeyPress}
 
                 />
+                {searchQuery ? (
+                <button className="navbar-button" onClick={handleRemoveSearch} style={{ marginLeft: 0 }}>
+                    <ClearIcon />
+                </button>
+            ) : null}
                 <button className="navbar-button" onClick={handleSearchClick}>
                     <SearchIcon />
                     <span className="navbar-button-label">Search</span>
@@ -52,6 +66,6 @@ export default function Navbar() {
                 <BookmarksIcon />
                 <span className="navbar-button-label">Readlist</span>
             </button>
-        </nav >
+        </nav>
     );
 }
