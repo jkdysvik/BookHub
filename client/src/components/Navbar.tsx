@@ -32,6 +32,8 @@ export default function Navbar() {
 
     const handleLogoClick = () => {
         navigate("/project2/");
+        setQuery('');
+        setSearchQuery('');    
     }
 
     const handleRemoveSearch = () => {
