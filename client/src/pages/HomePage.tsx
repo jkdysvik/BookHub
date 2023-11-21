@@ -135,10 +135,15 @@ function HomePage() {
                     )}
                     {Math.floor(offset / limit) == 0 && toggleLogo == 1 && (
                         <div>
-                            <img className="homepage-logo2" src={logo} onClick={() => setToggleLogo(2)} />
+                            <img className="homepage-logo1" src={logo} onClick={() => setToggleLogo(2)} />
                         </div>
                     )}
                     {Math.floor(offset / limit) == 0 && toggleLogo == 2 && (
+                        <div>
+                            <img className="homepage-logo2" src={logo} onClick={() => setToggleLogo(3)} />
+                        </div>
+                    )}
+                    {Math.floor(offset / limit) == 0 && toggleLogo == 3 && (
                         <div>
                             <img className="homepage-logo3" src={logo} onClick={() => setToggleLogo(0)} />
                         </div>
