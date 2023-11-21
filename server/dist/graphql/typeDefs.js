@@ -22,16 +22,31 @@ const typeDefs = `#graphql
     pages: Int
     language: String
   }
+  input ReviewInput {
+    bookID: String
+    username: String
+    rating: Float
+    review: String
+  }
+  type Review {
+    _id: ID!
+    bookID: String
+    username: String
+    rating: Float
+    review: String
+  }
 
   type Query {
     books(limit: Int, offset: Int, genre: String, orderBy: String): [Book]
     book(_id: ID!): Book!
+    bookReviews(bookID: String!): [Review]
   }
 
   type Mutation {
     createBook(input: BookInput): Book!
     updateBook(ID: ID!, input: BookInput): Book
     deleteBook(ID: ID!): Boolean
+    createReview(input: ReviewInput): Review!
   }
 `;
 exports.default = typeDefs;

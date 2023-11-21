@@ -29,3 +29,27 @@ export const GET_BOOK = gql`
     }
   }
 `;
+
+export const GET_REVIEWS = gql`
+  query BookReviews($bookID: String!) {
+    bookReviews(bookID: $bookID) {
+      _id
+      bookID
+      username
+      rating
+      review
+    }
+  }
+`;
+
+export const CREATE_REVIEW = gql`
+  mutation CreateReview($createReviewInput: ReviewInput) {
+    createReview(input: $createReviewInput) {
+      bookID
+      username
+      rating
+      review
+      _id
+    }
+  }
+`;
