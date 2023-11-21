@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router';
 import useGetBooks from '../hooks/useGetBooks';
 import { useSearch } from "../hooks/searchContext";
 import useGetSearchBooks from '../hooks/useGetSearchBooks';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 
 function HomePage() {
@@ -54,6 +56,7 @@ function HomePage() {
                 width: window.innerWidth,
                 height: window.innerHeight,
             });
+            window.location.reload();
         };
 
         // Adds event listener for window resize
@@ -115,7 +118,7 @@ function HomePage() {
 
     return (
         <>
-            <div className="home-page-container">
+            <div className="homepage-container">
                 <div>
                     <label htmlFor="genreSelect">Select genre:</label>
                     <select value={chosenGenre} id="genreSelect" onChange={selectGenre}>
@@ -159,11 +162,12 @@ function HomePage() {
                         />
                     ))}
                 </div>
-                <div className='scrolling-container'>
-                    {offset >= 10 && (
-                        <button onClick={() => setOffset(offset - 10)}>Previous</button>
+                <div className="homepage-scrolling-container">
+                    {offset >= limit && (
+                        <button className="homepage-scroll-button" onClick={() => setOffset(offset - limit)}><ArrowBackIcon fontSize='small' />Previous</button>
                     )}
-                    <button onClick={() => setOffset(offset + 10)}>Next</button>
+                    <div className="homepage-index">{Math.floor(offset / limit)}</div>
+                    < button className="homepage-scroll-button" onClick={() => setOffset(offset + limit)}>Next <ArrowForwardIcon fontSize='small' /></button>
                 </div>
             </div>
         </>
