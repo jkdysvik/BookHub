@@ -20,7 +20,7 @@ function HomePage() {
     const [chosenOrder, setChosenOrder] = useState<string>(sessionStorage.getItem('chosenOrder') ? sessionStorage.getItem('chosenOrder') as string : 'rating');
     const { searchQuery } = useSearch();
     const [limit, setLimit] = useState<number>(10);
-    const [toggleLogo, setToggleLogo] = useState<number>(0);
+    const [toggleLogo, setToggleLogo] = useState<number>(1);
     const [viewportSize, setViewportSize] = useState<{ width: number; height: number }>({
         width: window.innerWidth,
         height: window.innerHeight,
@@ -81,6 +81,7 @@ function HomePage() {
         }
         sessionStorage.setItem('chosenGenre', chosenGenre);
         setOffset(0);
+        setToggleLogo(0);
     }, [chosenGenre]);
 
     useEffect(() => {
@@ -90,6 +91,7 @@ function HomePage() {
         }
         sessionStorage.setItem('chosenOrder', chosenOrder);
         setOffset(0);
+        setToggleLogo(0);
     }, [chosenOrder]);
 
     useEffect(() => {
@@ -100,6 +102,7 @@ function HomePage() {
         sessionStorage.setItem('searchQuery', searchQuery);
 
         setOffset(0);
+        setToggleLogo(0);
         console.log('Search query updated:', searchQuery);
         console.log(typeof searchQuery)
     }, [searchQuery]);
@@ -128,24 +131,24 @@ function HomePage() {
         <>
             <div className="homepage-container">
                 <div>
-                    {Math.floor(offset / limit) == 0 && toggleLogo == 0 && (
-                        <div>
-                            <img className="homepage-logo" src={logo} onClick={() => setToggleLogo(1)} />
-                        </div>
-                    )}
                     {Math.floor(offset / limit) == 0 && toggleLogo == 1 && (
                         <div>
-                            <img className="homepage-logo1" src={logo} onClick={() => setToggleLogo(2)} />
+                            <img className="homepage-logo" src={logo} onClick={() => setToggleLogo(2)} />
                         </div>
                     )}
                     {Math.floor(offset / limit) == 0 && toggleLogo == 2 && (
                         <div>
-                            <img className="homepage-logo2" src={logo} onClick={() => setToggleLogo(3)} />
+                            <img className="homepage-logo1" src={logo} onClick={() => setToggleLogo(3)} />
                         </div>
                     )}
                     {Math.floor(offset / limit) == 0 && toggleLogo == 3 && (
                         <div>
-                            <img className="homepage-logo3" src={logo} onClick={() => setToggleLogo(0)} />
+                            <img className="homepage-logo2" src={logo} onClick={() => setToggleLogo(4)} />
+                        </div>
+                    )}
+                    {Math.floor(offset / limit) == 0 && toggleLogo == 4 && (
+                        <div>
+                            <img className="homepage-logo3" src={logo} onClick={() => setToggleLogo(1)} />
                         </div>
                     )}
 
