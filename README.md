@@ -17,6 +17,15 @@ Welcome to BookHub, a dynamic and user-friendly website designed for book enthus
 - **Component testing**: Testing for HomePage and BookPage
 - **End 2 end**: End to end testing with playwright
 
+Navigate to the test folder:
+
+```
+  cd client/src/tests
+```
+and run:
+```
+  npm test
+```
 ## Technology Stack
 
 ### Backend
