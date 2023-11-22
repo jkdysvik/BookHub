@@ -54,8 +54,11 @@ function BookPage() {
 
     return response.json();
   };
-  const mutation = useMutation(createReviewMutation);
-
+  const [showFullDescription, setShowFullDescription] = useState(false);
+  const [NewReview, setNewReview] = useState<boolean>(false);
+  const { data } = useGetBook(bookId);
+  const { data: dataReviews } = useGetReviews(bookId);
+  const book = data?.book;
   const [formState, setFormState] = useState<NewReviewProps>({
     bookID: bookId || '',
     username: '',
@@ -63,13 +66,11 @@ function BookPage() {
     review: '',
   });
 
+
   const updateFormState = (newFormState: NewReviewProps) => {
     setFormState(newFormState);
   }
 
-  const [showFullDescription, setShowFullDescription] = useState(false);
-  const { data } = useGetBook(bookId);
-  const { data: dataReviews } = useGetReviews(bookId);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -89,12 +90,12 @@ function BookPage() {
         console.error('Mutation failed:', error);
       });
 
-
-
   };
-  const book = data?.book;
   const toggleDescription = () => {
     setShowFullDescription(!showFullDescription);
+  };
+  const toggleNewReview = () => {
+    setNewReview(!NewReview);
   };
 
   const handleEnter = (e: React.KeyboardEvent<HTMLButtonElement>) => {
@@ -158,8 +159,8 @@ function BookPage() {
           )
         }
       </div>
-      <ReviewList reviews={dataReviews} />
-      <NewReviewForm onSubmit={handleSubmit} updateFormState={updateFormState} />
+      {NewReview && (<NewReviewForm onSubmit={handleSubmit} updateFormState={updateFormState} />)};
+      <ReviewList reviews={dataReviews} toggleNewReview={toggleNewReview} />
     </div>
   );
 }

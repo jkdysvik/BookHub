@@ -5,15 +5,15 @@ import StarIcon from '@mui/icons-material/Star';
 import AddIcon from '@mui/icons-material/Add';
 import '../BookPage.scss';
 
-const ReviewList: FC<ReviewListProps> = ({ reviews }) => {
+const ReviewList: FC<ReviewListProps> = ({ reviews, toggleNewReview }) => {
 
     return (
         <div className="bookpage-review-container">
             <div className="bookpage-reaviews-heading">
                 <div className='bookpage-reviews-title'>Reviews</div>
-                <button className="bookpage-add-review-button">
+                <button className="bookpage-add-review-button" onClick={toggleNewReview}>
                     <AddIcon />
-                    Add review
+                    New review
                 </button>
             </div>
             <div className="bookpage-review-list">

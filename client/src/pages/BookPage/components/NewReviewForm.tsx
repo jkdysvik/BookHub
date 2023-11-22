@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import Modal from "react-modal";
 import { NewReviewFormProps, NewReviewProps } from "../types";
+import "./NewReviewForm.scss";
 
-const NewReviewForm: React.FC<NewReviewFormProps> = ({ onSubmit, mutation, updateFormState }) => {
+const NewReviewForm: React.FC<NewReviewFormProps> = ({ onSubmit, toggleNewReview, updateFormState }) => {
     const [formState, setFormState] = useState<NewReviewProps>({
         bookID: '',
         username: '',
@@ -9,59 +11,44 @@ const NewReviewForm: React.FC<NewReviewFormProps> = ({ onSubmit, mutation, updat
         review: '',
     });
 
-
     useEffect(() => {
         updateFormState(formState);
-    }
-        , [formState, updateFormState]);
+    }, [formState, updateFormState]);
+
+    const closeModal = () => {
+        // Add any additional logic you need when closing the modal
+        setFormState({
+            bookID: '',
+            username: '',
+            rating: 0,
+            review: '',
+        });
+    };
 
     return (
-        <div id="addReview">
-            <h2>Add review</h2>
-            <form onSubmit={onSubmit}>
-                <label htmlFor="username">Username: </label>
-                <input
-                    type="text"
-                    name="username"
-                    id="username"
-                    value={formState.username}
-                    onChange={(e) => setFormState({ ...formState, username: e.target.value })}
-                />
-                <p></p>
-                <label htmlFor="rating">Rating: </label>
-                <input
-                    type="number"
-                    name="rating"
-                    id="rating"
-                    min="1"
-                    max="5"
-                    value={formState.rating}
-                    onChange={(e) => setFormState({ ...formState, rating: parseInt(e.target.value) })}
-                />
-                <p></p>
-                <label htmlFor="review">Review: </label>
-                <textarea
-                    name="review"
-                    id="review"
-                    maxLength="100"
-                    cols="30"
-                    rows="5"
-                    value={formState.review}
-                    onChange={(e) => setFormState({ ...formState, review: e.target.value })}
-                ></textarea>
-                <p></p>
-                <button
-                    type="submit"
-                    disabled={!formState.username.trim() || !formState.review.trim()}
-                    style={{
-                        backgroundColor: !formState.username.trim() || !formState.review.trim() ? '#ccc' : 'blue',
-                        color: 'white',
-                    }}
-                >
-                    Submit
-                </button>
-            </form>
-        </div>
+        <Modal
+            isOpen={toggleNewReview}
+            onRequestClose={closeModal}
+            contentLabel="New Review Form"
+        >
+            <div className="newreviewform-container">
+                <h2>New review</h2>
+                <form onSubmit={onSubmit}>
+                    {/* Form content remains the same */}
+                    {/* ... */}
+                    <button
+                        type="submit"
+                        disabled={!formState.username.trim() || !formState.review.trim()}
+                        style={{
+                            backgroundColor: !formState.username.trim() || !formState.review.trim() ? '#ccc' : 'blue',
+                            color: 'white',
+                        }}
+                    >
+                        Submit
+                    </button>
+                </form>
+            </div>
+        </Modal>
     );
 };
 

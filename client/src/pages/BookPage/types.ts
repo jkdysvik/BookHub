@@ -10,9 +10,11 @@ export type NewReviewProps = {
 
 export type ReviewListProps = {
     reviews: { reviews: ReviewProps[]; } | undefined;
+    toggleNewReview: () => void;
 };
 
 export type NewReviewFormProps = {
     onSubmit: (event: React.FormEvent) => Promise<void>;
     updateFormState: (newFormState: NewReviewProps) => void;
+    toggleNewReview: () => void;
 }
