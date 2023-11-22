@@ -1,5 +1,5 @@
 import "./Navbar.scss";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import logo from "../assets/logo.png";
 import logosmall from "../assets/logo-small.png";
 import { useNavigate } from "react-router";
@@ -11,6 +11,24 @@ import { useSearch } from "../hooks/searchContext";
 export default function Navbar() {
     const [query, setQuery] = useState<string>("");
     const { searchQuery, setSearchQuery } = useSearch();
+
+    const handleEnter = (e: KeyboardEvent) => {
+        if (e.key === 'Enter') {
+            const focusedElement = document.activeElement as HTMLElement;
+            if (focusedElement) {
+                focusedElement.click();
+            }
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener('keydown', handleEnter);
+
+        // Cleanup the event listener on component unmount
+        return () => {
+            document.removeEventListener('keydown', handleEnter);
+        };
+    }, []);
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         setQuery(event.target.value);
@@ -44,8 +62,8 @@ export default function Navbar() {
 
     return (
         <nav className="navbar-container">
-            <img onClick={handleLogoClick} className="logo" src={logo} alt="logo" />
-            <img onClick={handleLogoClick} className="logo-small" src={logosmall} alt="logo" />
+            <img onClick={handleLogoClick} onKeyDown={handleEnter} className="logo" src={logo} alt="logo" tabIndex={0} />
+            <img onClick={handleLogoClick} className="logo-small" src={logosmall} alt="logo" tabIndex={0} />
             <div className="search-bar">
                 <input
                     className="search-input"

@@ -12,6 +12,7 @@
     &:hover,
     &:focus {
         transform: scale(1.1);
+        outline: #35633b solid 1.5px;
     }
 
     @media (max-width: 452px) {

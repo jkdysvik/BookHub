@@ -90,6 +90,15 @@ function BookPage() {
     setShowFullDescription(!showFullDescription);
   };
 
+  const handleEnter = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (e.key === 'Enter') {
+      const focusedElement = document.activeElement as HTMLElement;
+      if (focusedElement) {
+        focusedElement.click();
+      }
+    }
+  };
+
   return (
     <div className="bookPage-container">
       <button className="bookpage-bookmark-button">
@@ -133,7 +142,9 @@ function BookPage() {
       </p>
       {
         book?.description && book.description.length > 400 && (
-          <button className="bookpage-readmore-button" onClick={toggleDescription}>
+          <button className="bookpage-readmore-button"
+            onClick={toggleDescription}
+            onKeyDown={handleEnter}>
             {showFullDescription ? "Read Less" : "Read More"}
           </button>
         )

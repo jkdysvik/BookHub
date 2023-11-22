@@ -14,7 +14,6 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 function HomePage() {
     const navigate = useNavigate();
 
-
     const [chosenGenre, setChosenGenre] = useState<string>(sessionStorage.getItem('chosenGenre') ? sessionStorage.getItem('chosenGenre') as string : '');
     const [offset, setOffset] = useState<number>(sessionStorage.getItem('offset') ? parseInt(sessionStorage.getItem('offset') as string) : 0);
     const [chosenOrder, setChosenOrder] = useState<string>(sessionStorage.getItem('chosenOrder') ? sessionStorage.getItem('chosenOrder') as string : 'rating');
@@ -29,6 +28,16 @@ function HomePage() {
     const { error, data, isLoading } = searchQuery
         ? useGetSearchBooks(searchQuery, offset, chosenGenre, chosenOrder, limit)
         : useGetBooks(offset, chosenGenre, chosenOrder, limit);
+
+
+    const handleEnter = (e: KeyboardEvent) => {
+        if (e.key === 'Enter') {
+            const focusedElement = document.activeElement as HTMLElement;
+            if (focusedElement) {
+                focusedElement.click();
+            }
+        }
+    };
 
 
     const selectGenre = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -46,10 +55,8 @@ function HomePage() {
     };
 
     const handleCardClick = (id: string) => {
-        console.log(id);
         navigate('/project2/book/' + id);
     };
-
 
 
     useEffect(() => {
@@ -61,12 +68,13 @@ function HomePage() {
             window.location.reload();
         };
 
-        // Adds event listener for window resize
+        document.addEventListener('keydown', handleEnter);
         window.addEventListener('resize', handleResize);
 
         // Removes event listener on component unmount
         return () => {
             window.removeEventListener('resize', handleResize);
+            document.removeEventListener('keydown', handleEnter);
         };
     }, []);
 
@@ -153,7 +161,9 @@ function HomePage() {
                     )}
 
                     <label htmlFor="genreSelect">Select genre:</label>
-                    <select value={chosenGenre} id="genreSelect" onChange={selectGenre}>
+                    <select value={chosenGenre}
+                        onChange={selectGenre}
+                        tabIndex={0}>
                         <option value="">All</option>
                         <option value="Fantasy">Fantasy</option>
                         <option value="Fiction">Fiction</option>
@@ -163,12 +173,10 @@ function HomePage() {
                         <option value="Science">Science</option>
                     </select>
                 </div>
-
-
-
                 <div>
                     <label htmlFor="orderBySelect">Order by:</label>
-                    <select value={chosenOrder} onChange={(e) => orderBy(e.target.value as keyof BookCardProps)}>
+                    <select value={chosenOrder}
+                        onChange={(e) => orderBy(e.target.value as keyof BookCardProps)}>
                         <option value="title">Title</option>
                         <option value="author">Author</option>
                         <option value="rating">Rating</option>
@@ -206,7 +214,7 @@ function HomePage() {
                     )}
 
                 </div>
-            </div>
+            </div >
         </>
     );
 }
