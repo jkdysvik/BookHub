@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import Homepage from './pages/HomePage/HomePage.tsx'
-import BookPage from './pages/BookPage.tsx'
+import BookPage from './pages/BookPage/BookPage.tsx'
 import Navbar from './components/Navbar';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
