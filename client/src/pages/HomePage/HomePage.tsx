@@ -9,6 +9,7 @@ import useGetSearchBooks from '../../hooks/useGetSearchBooks';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import FrontPageLogo from './components/FrontPageLogo.tsx';
+import Select from './components/Select.tsx';
 
 
 function HomePage() {
@@ -147,28 +148,8 @@ function HomePage() {
         <>
             <div className="homepage-container">
                 <FrontPageLogo toggleLogo={toggleLogo} logo_num={Logo} page={Math.floor(offset / limit)} />
-                <label htmlFor="genreSelect">Select genre:</label>
-                <select value={chosenGenre}
-                    onChange={selectGenre}
-                    tabIndex={0}>
-                    <option value="">All</option>
-                    <option value="Fantasy">Fantasy</option>
-                    <option value="Fiction">Fiction</option>
-                    <option value="Romance">Romance</option>
-                    <option value="History">History</option>
-                    <option value="Historical Fiction">Historical fiction</option>
-                    <option value="Science">Science</option>
-                </select>
-                <div>
-                    <label htmlFor="orderBySelect">Order by:</label>
-                    <select value={chosenOrder}
-                        onChange={(e) => orderBy(e.target.value as keyof BookCardProps)}>
-                        <option value="title">Title</option>
-                        <option value="author">Author</option>
-                        <option value="rating">Rating</option>
-                        <option value="year">Year</option>
-                    </select>
-                </div>
+                <Select chosenGenre={chosenGenre} onChange={selectGenre} type='genre' />
+                <Select chosenOrder={chosenOrder} onChange={(e) => orderBy(e.target.value as keyof BookCardProps)} type='order' />
                 <div className="book-card-container">
                     {(searchQuery
                         ? (data as unknown as { searchBooks: BookCardProps[] }).searchBooks
