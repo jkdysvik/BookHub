@@ -7,6 +7,8 @@ import useGetReviews from "../../hooks/useGetReviews";
 import { useState } from "react";
 import { useMutation } from '@tanstack/react-query';
 import ReviewList from "./components/ReviewList";
+import { NewReviewProps } from "./types";
+import NewReviewForm from "./components/NewReviewForm";
 
 interface NewReview {
   bookID: string;
@@ -73,7 +75,7 @@ function BookPage() {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     console.log(formState)
-    const data: NewReview = {
+    const data: NewReviewProps = {
       bookID: bookId || '',
       username: formState.username,
       rating: formState.rating,
@@ -157,7 +159,7 @@ function BookPage() {
           )
         }
       </div>
-      {NewReview && (<NewReviewForm onSubmit={handleSubmit} updateFormState={updateFormState} />)};
+      {NewReview && (<NewReviewForm onSubmit={handleSubmit} updateFormState={updateFormState} toggleNewReview={toggleNewReview} />)};
       <ReviewList reviews={dataReviews} toggleNewReview={toggleNewReview} />
     </div>
   );
