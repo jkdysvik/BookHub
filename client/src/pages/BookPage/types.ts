@@ -9,7 +9,6 @@ export type NewReviewProps = {
 
 export type ReviewListProps = {
   reviews: { reviews: ReviewProps[] } | undefined;
-  toggleNewReview: () => void;
 };
 
 export type NewReviewFormProps = {

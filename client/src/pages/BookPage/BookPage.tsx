@@ -156,7 +156,7 @@ function BookPage() {
         <div style={{ fontWeight: "bold", margin: "20px" }}>Description:</div>
         <p>
           {showFullDescription ||
-          (book?.description && book?.description.length < 400)
+            (book?.description && book?.description.length < 400)
             ? book?.description
             : `${book?.description.substring(0, 400)}...`}
         </p>
@@ -187,7 +187,7 @@ function BookPage() {
           toggleNewReview={toggleNewReview}
         />
       )}
-      <ReviewList reviews={dataReviews} toggleNewReview={toggleNewReview} />
+      <ReviewList reviews={dataReviews} />
     </div>
   );
 }
