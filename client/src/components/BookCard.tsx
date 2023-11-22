@@ -8,6 +8,14 @@ const BookCard = ({ _id, title, author, year, rating, genre, onClick }: BookCard
         onClick(_id);
     };
 
+    const handleEnter = (e: React.KeyboardEvent<HTMLDivElement>) => {
+        if (e.key === 'Enter') {
+            handleClick();
+        }
+
+    }
+
+
     if (title.length > 20) {
         title = title.substring(0, 20) + '...';
     }
@@ -16,7 +24,10 @@ const BookCard = ({ _id, title, author, year, rating, genre, onClick }: BookCard
     }
     return (
 
-        <div onClick={handleClick} className="book-card">
+        <div className="book-card"
+            onClick={handleClick}
+            onKeyDown={handleEnter}
+            tabIndex={0}>
             <div className="title-div">
                 <h2 className="book-card-title">{title}</h2>
             </div>

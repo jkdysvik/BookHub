@@ -153,7 +153,7 @@ function HomePage() {
                     )}
 
                     <label htmlFor="genreSelect">Select genre:</label>
-                    <select value={chosenGenre} id="genreSelect" onChange={selectGenre}>
+                    <select value={chosenGenre} onChange={selectGenre}>
                         <option value="">All</option>
                         <option value="Fantasy">Fantasy</option>
                         <option value="Fiction">Fiction</option>
@@ -163,9 +163,6 @@ function HomePage() {
                         <option value="Science">Science</option>
                     </select>
                 </div>
-
-
-
                 <div>
                     <label htmlFor="orderBySelect">Order by:</label>
                     <select value={chosenOrder} onChange={(e) => orderBy(e.target.value as keyof BookCardProps)}>
