@@ -149,7 +149,7 @@ function HomePage() {
             <div className="homepage-container">
                 <FrontPageLogo toggleLogo={toggleLogo} logo_num={Logo} page={Math.floor(offset / limit)} />
                 <Select chosenGenre={chosenGenre} onChange={selectGenre} type='genre' />
-                <Select chosenOrder={chosenOrder} onChange={(e) => orderBy(e.target.value as keyof BookCardProps)} type='order' />
+                <Select chosenOrder={chosenOrder} onChange={(e: React.ChangeEvent<HTMLSelectElement>) => orderBy(e.target.value as keyof BookCardProps)} type='order' />
                 <div className="book-card-container">
                     {(searchQuery
                         ? (data as unknown as { searchBooks: BookCardProps[] }).searchBooks
