@@ -52,7 +52,7 @@ export default function Navbar() {
     const handleLogoClick = () => {
         navigate("/project2/");
         setQuery('');
-        setSearchQuery('');
+        setSearchQuery('');    
     }
 
     const handleRemoveSearch = () => {
@@ -75,10 +75,10 @@ export default function Navbar() {
 
                 />
                 {searchQuery ? (
-                    <button className="navbar-button" onClick={handleRemoveSearch} style={{ marginLeft: 0 }}>
-                        <ClearIcon />
-                    </button>
-                ) : null}
+                <button className="navbar-button" id="remove-button" onClick={handleRemoveSearch} style={{ marginLeft: 0 }}>
+                    <ClearIcon />
+                </button>
+            ) : null}
                 <button className="navbar-button" onClick={handleSearchClick}>
                     <SearchIcon />
                     <span className="navbar-button-label">Search</span>

@@ -10,7 +10,7 @@ const Select: FC<SelectProps> = ({ chosenGenre, chosenOrder, onChange, type }) =
             {type === "genre" && (
                 <div>
                     <label htmlFor="genreSelect">Select genre:</label>
-                    <select value={chosenGenre} onChange={onChange} tabIndex={0}>
+                    <select value={chosenGenre} id='genreSelect' onChange={onChange} tabIndex={0}>
                         <option value="">All</option>
                         <option value="Fantasy">Fantasy</option>
                         <option value="Fiction">Fiction</option>
@@ -18,13 +18,14 @@ const Select: FC<SelectProps> = ({ chosenGenre, chosenOrder, onChange, type }) =
                         <option value="History">History</option>
                         <option value="Historical Fiction">Historical fiction</option>
                         <option value="Science">Science</option>
+                        <option value="Science Fiction">Science fiction</option>
                     </select>
                 </div>
             )}
             {type === "order" && (
                 <div>
                     <label htmlFor="orderBySelect">Order by:</label>
-                    <select value={chosenOrder} onChange={onChange}>
+                    <select value={chosenOrder} id='orderBySelect' onChange={onChange}>
                         <option value="title">Title</option>
                         <option value="author">Author</option>
                         <option value="rating">Rating</option>

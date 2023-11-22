@@ -37,8 +37,10 @@ const BookCard = ({ _id, title, author, year, rating, genre, onClick }: BookCard
             <div className="author-div">
                 <p className="book-card-author">{author}</p>
             </div>
-            <p className="book-card-year">{year}</p>
-            <p className="book-card-genre">{genre}</p>
+            <div className="info-div">
+                <p className="book-card.year">{year}</p>
+                <p className="book-card.genre">{genre}</p>
+            </div>
         </div>
     );
 };
