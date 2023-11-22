@@ -2,20 +2,12 @@ import { FC } from 'react';
 import { ReviewListProps } from '../types.ts';
 import PersonIcon from '@mui/icons-material/Person';
 import StarIcon from '@mui/icons-material/Star';
-import AddIcon from '@mui/icons-material/Add';
 import '../BookPage.scss';
 
-const ReviewList: FC<ReviewListProps> = ({ reviews, toggleNewReview }) => {
+const ReviewList: FC<ReviewListProps> = ({ reviews }) => {
 
     return (
         <div className="bookpage-review-container">
-            <div className="bookpage-reaviews-heading">
-                <div className='bookpage-reviews-title'>Reviews</div>
-                <button className="bookpage-add-review-button" onClick={toggleNewReview}>
-                    <AddIcon />
-                    New review
-                </button>
-            </div>
             <div className="bookpage-review-list">
                 {reviews?.bookReviews.map((review) => (
                     <div className="bookpage-review" key={review._id}>

@@ -3,9 +3,9 @@ import useGetBook from "../../hooks/useGetBook";
 import "./BookPage.scss";
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import StarIcon from '@mui/icons-material/Star';
+import AddIcon from '@mui/icons-material/Add';
 import useGetReviews from "../../hooks/useGetReviews";
 import { useState } from "react";
-import { useMutation } from '@tanstack/react-query';
 import ReviewList from "./components/ReviewList";
 import { NewReviewProps } from "./types";
 import NewReviewForm from "./components/NewReviewForm";
@@ -159,7 +159,14 @@ function BookPage() {
           )
         }
       </div>
-      {NewReview && (<NewReviewForm onSubmit={handleSubmit} updateFormState={updateFormState} toggleNewReview={toggleNewReview} />)};
+      <div className="bookpage-reviews-heading">
+        <div className='bookpage-reviews-title'>Reviews</div>
+        <button className="bookpage-add-review-button" onClick={toggleNewReview}>
+          <AddIcon />
+          New review
+        </button>
+      </div>
+      {NewReview && (<NewReviewForm onSubmit={handleSubmit} updateFormState={updateFormState} toggleNewReview={toggleNewReview} />)}
       <ReviewList reviews={dataReviews} toggleNewReview={toggleNewReview} />
     </div>
   );
