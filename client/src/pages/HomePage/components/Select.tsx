@@ -24,7 +24,7 @@ const Select: FC<SelectProps> = ({ chosenGenre, chosenOrder, onChange, type }) =
             {type === "order" && (
                 <div>
                     <label htmlFor="orderBySelect">Order by:</label>
-                    <select value={chosenOrder} onChange={(e) => orderBy(e.target.value as keyof BookCardProps)}>
+                    <select value={chosenOrder} onChange={onChange}>
                         <option value="title">Title</option>
                         <option value="author">Author</option>
                         <option value="rating">Rating</option>
