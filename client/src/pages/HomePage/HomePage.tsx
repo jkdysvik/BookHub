@@ -1,14 +1,14 @@
 import './HomePage.scss';
-import logo from '../assets/logo2.png';
 import { useEffect, useState } from 'react';
-import BookCard from '../components/BookCard';
-import { BookCardProps } from '../types/BookCardProps';
+import BookCard from '../../components/BookCard';
+import { BookCardProps } from '../../types/BookCardProps';
 import { useNavigate } from 'react-router';
-import useGetBooks from '../hooks/useGetBooks';
-import { useSearch } from "../hooks/searchContext";
-import useGetSearchBooks from '../hooks/useGetSearchBooks';
+import useGetBooks from '../../hooks/useGetBooks';
+import { useSearch } from "../../hooks/searchContext";
+import useGetSearchBooks from '../../hooks/useGetSearchBooks';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import FrontPageLogo from './components/FrontPageLogo.tsx';
 
 
 function HomePage() {
@@ -19,7 +19,7 @@ function HomePage() {
     const [chosenOrder, setChosenOrder] = useState<string>(sessionStorage.getItem('chosenOrder') ? sessionStorage.getItem('chosenOrder') as string : 'rating');
     const { searchQuery } = useSearch();
     const [limit, setLimit] = useState<number>(10);
-    const [toggleLogo, setToggleLogo] = useState<number>(1);
+    const [Logo, setLogo] = useState<number>(1);
     const [viewportSize, setViewportSize] = useState<{ width: number; height: number }>({
         width: window.innerWidth,
         height: window.innerHeight,
@@ -58,6 +58,14 @@ function HomePage() {
         navigate('/project2/book/' + id);
     };
 
+    const toggleLogo = () => {
+        if (Logo === 4) {
+            setLogo(1);
+        }
+        else
+            setLogo(Logo + 1);
+    }
+
 
     useEffect(() => {
         const handleResize = () => {
@@ -89,7 +97,7 @@ function HomePage() {
         }
         sessionStorage.setItem('chosenGenre', chosenGenre);
         setOffset(0);
-        setToggleLogo(0);
+        setLogo(0);
     }, [chosenGenre]);
 
     useEffect(() => {
@@ -99,7 +107,7 @@ function HomePage() {
         }
         sessionStorage.setItem('chosenOrder', chosenOrder);
         setOffset(0);
-        setToggleLogo(0);
+        setLogo(0);
     }, [chosenOrder]);
 
     useEffect(() => {
@@ -110,7 +118,7 @@ function HomePage() {
         sessionStorage.setItem('searchQuery', searchQuery);
 
         setOffset(0);
-        setToggleLogo(0);
+        setLogo(0);
         console.log('Search query updated:', searchQuery);
         console.log(typeof searchQuery)
     }, [searchQuery]);
@@ -138,41 +146,19 @@ function HomePage() {
     return (
         <>
             <div className="homepage-container">
-                <div>
-                    {Math.floor(offset / limit) == 0 && toggleLogo == 1 && (
-                        <div>
-                            <img className="homepage-logo" src={logo} onClick={() => setToggleLogo(2)} />
-                        </div>
-                    )}
-                    {Math.floor(offset / limit) == 0 && toggleLogo == 2 && (
-                        <div>
-                            <img className="homepage-logo1" src={logo} onClick={() => setToggleLogo(3)} />
-                        </div>
-                    )}
-                    {Math.floor(offset / limit) == 0 && toggleLogo == 3 && (
-                        <div>
-                            <img className="homepage-logo2" src={logo} onClick={() => setToggleLogo(4)} />
-                        </div>
-                    )}
-                    {Math.floor(offset / limit) == 0 && toggleLogo == 4 && (
-                        <div>
-                            <img className="homepage-logo3" src={logo} onClick={() => setToggleLogo(1)} />
-                        </div>
-                    )}
-
-                    <label htmlFor="genreSelect">Select genre:</label>
-                    <select value={chosenGenre}
-                        onChange={selectGenre}
-                        tabIndex={0}>
-                        <option value="">All</option>
-                        <option value="Fantasy">Fantasy</option>
-                        <option value="Fiction">Fiction</option>
-                        <option value="Romance">Romance</option>
-                        <option value="History">History</option>
-                        <option value="Historical Fiction">Historical fiction</option>
-                        <option value="Science">Science</option>
-                    </select>
-                </div>
+                <FrontPageLogo toggleLogo={toggleLogo} logo_num={Logo} page={Math.floor(offset / limit)} />
+                <label htmlFor="genreSelect">Select genre:</label>
+                <select value={chosenGenre}
+                    onChange={selectGenre}
+                    tabIndex={0}>
+                    <option value="">All</option>
+                    <option value="Fantasy">Fantasy</option>
+                    <option value="Fiction">Fiction</option>
+                    <option value="Romance">Romance</option>
+                    <option value="History">History</option>
+                    <option value="Historical Fiction">Historical fiction</option>
+                    <option value="Science">Science</option>
+                </select>
                 <div>
                     <label htmlFor="orderBySelect">Order by:</label>
                     <select value={chosenOrder}
@@ -214,7 +200,7 @@ function HomePage() {
                     )}
 
                 </div>
-            </div >
+            </div>
         </>
     );
 }
