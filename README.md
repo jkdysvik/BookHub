@@ -9,6 +9,8 @@ Welcome to BookHub, a dynamic and user-friendly website designed for book enthus
 - **Book Exploration**: Browse a wide range of books.
 - **Genre Sorting**: Filter books based on your preferred genres.
 - **Search Functionality**: Find specific books using our search feature.
+- **Reviews**: View reviews and add your own.
+- **Readlist(under development)**: Add books to your own read list
 
 ## Technology Stack
 
@@ -16,13 +18,12 @@ Welcome to BookHub, a dynamic and user-friendly website designed for book enthus
 
 - **MongoDB**: Our database choice for efficient data storage and retrieval.
 - **GraphQL**: A query language for our API, offering flexibility and efficiency in data operations.
-- **Apollo Server**: An open-source GraphQL server that integrates seamlessly with MongoDB and GraphQL, providing a robust backend structure.
 
 ### Frontend
 
 - **React with Vite**: For a modern, fast, and reactive user interface.
 - **Context API**: Used for managing the application state within React, ensuring efficient data handling.
-- **Apollo Client**: Integrated with React to manage both local and remote data with GraphQL.
+- **TanStack Query**: A powerful, performant, and flexible fetching library for React, replacing Apollo Client. It manages server state, caching, synchronization, and more.
 
 ## Getting Started
 
