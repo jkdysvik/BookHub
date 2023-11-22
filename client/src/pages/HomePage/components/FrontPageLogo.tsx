@@ -1,5 +1,6 @@
 import { FrontPageLogoProps } from '../types.ts';
 import logo from '../../../assets/logo2.png';
+import '../HomePage.scss';
 
 const FrontPageLogo = ({ page, logo_num, toggleLogo }: FrontPageLogoProps) => {
 

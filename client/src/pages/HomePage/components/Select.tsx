@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { SelectProps } from '../types.ts';
 import { BookCardProps } from '../../../types/BookCardProps.ts';
+import '../HomePage.scss';
 
 const Select: FC<SelectProps> = ({ chosenGenre, chosenOrder, onChange, type }) => {
 

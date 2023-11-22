@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { PaginationProps } from '../types.ts';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import '../HomePage.scss';
 
 const Pagination: FC<PaginationProps> = ({ offset, limit, setOffset, booksLen }) => {
 

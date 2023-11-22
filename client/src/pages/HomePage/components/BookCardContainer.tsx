@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { BookCardContainerProps } from '../types.ts';
 import BookCard from '../../../components/BookCard.tsx';
+import '../HomePage.scss';
 
 const BookCardContainer: FC<BookCardContainerProps> = ({ books, handleCardClick }) => {
 
