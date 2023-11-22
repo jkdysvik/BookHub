@@ -65,7 +65,7 @@ function HomePage() {
             setLogo(Logo + 1);
     }
     const books: BookCardProps[] = searchQuery
-        ? (data as unknown as { searchBooks: BookCardProps[] }).searchBooks
+        ? (data as unknown as { searchBooks: BookCardProps[] })?.searchBooks
         : (data?.books as BookCardProps[])
 
 
@@ -94,7 +94,6 @@ function HomePage() {
 
     useEffect(() => {
         if (chosenGenre === sessionStorage.getItem('chosenGenre')) {
-            console.log("genre same")
             return;
         }
         sessionStorage.setItem('chosenGenre', chosenGenre);
