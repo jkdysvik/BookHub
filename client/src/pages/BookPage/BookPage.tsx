@@ -7,8 +7,6 @@ import useGetReviews from "../../hooks/useGetReviews";
 import { useState } from "react";
 import { useMutation } from '@tanstack/react-query';
 import ReviewList from "./components/ReviewList";
-import NewReviewForm from "./components/NewReviewForm";
-import { NewReviewProps } from "./types";
 
 interface NewReview {
   bookID: string;
@@ -22,7 +20,7 @@ interface NewReview {
 
 function BookPage() {
   const { bookId } = useParams(); // Ensure this matches the URL parameter
-  const createReviewMutation = async (newReview: NewReviewProps) => {
+  const createReviewMutation = async (newReview: NewReview) => {
     const query = `
       mutation CreateReview($createReviewInput: ReviewInput) {
         createReview(input: $createReviewInput) {

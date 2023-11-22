@@ -1,4 +1,3 @@
-import { UseMutationResult } from "@tanstack/react-query";
 import { ReviewProps } from "../../types/ReviewProps";
 
 export type NewReviewProps = {
