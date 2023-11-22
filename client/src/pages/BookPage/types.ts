@@ -8,5 +8,5 @@ export type NewReviewProps = {
 };
 
 export type ReviewListProps = {
-    reviews: ReviewProps[] | undefined;
+    reviews: { reviews: ReviewProps[]; } | undefined;
 };

@@ -73,28 +73,61 @@
 .bookpage-reviews-container {
     max-width: 600px;
     margin: o auto;
-    background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
+    background-color: #f4f4f4;
+    height: fit-content;
 }
 
 .bookpage-review {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: space-between;
     margin: 5px 0px;
-    height: fit-content;
-    padding: 0 20px;
+    max-height: 200px;
 }
 
 .bookpage-review-header {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-    margin: 5px 0px;
-    width: 100%;
+    justify-content: flex-start;
+    padding: 10px 2.5%;
+    width: 95%;
     height: 20px;
+    border-bottom: 1px solid #f4f4f4;
+}
+
+.bookpage-review-text {
+    margin: 10px 10px;
+    max-width: 100%;
+    height: fit-content;
+    overflow: wrap;
+}
+
+.bookpage-review-rating {
+    margin: 10px 10px;
+    max-width: 100%;
+    height: fit-content;
+    overflow: wrap;
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+.bookpage-review-username {
+    font-weight: bold;
+    display: flex;
+    justify-content: flex-start;
+    min-width: 75%;
+    margin: 10px 10px 10px 10px;
+}
+
+.bookpage-review-icon {
+    font-weight: bold;
+    min-width: 5%;
+    margin: 10px 10px 10px 10px;
+
 }

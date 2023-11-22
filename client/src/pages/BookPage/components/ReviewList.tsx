@@ -13,16 +13,21 @@ const ReviewList: FC<ReviewListProps> = ({ reviews }) => {
                 {reviews?.bookReviews.map((review) => (
                     <div className="bookpage-review" key={review._id}>
                         <div className="bookpage-review-header">
-                            <PersonIcon style={{ fontSize: 'large', marginLeft: '0px', color: '#35633b' }} />
-                            {review.username}
-                            <p>
+                            <PersonIcon className="bookpage-review-icon" style={{ fontSize: 'large', marginLeft: '0px', color: '#35633b' }} />
+                            <div className="bookpage-review-username">
+                                {review.username}
+                            </div>
+                            <div className="bookpage-review-rating">
                                 {Array.from({ length: review.rating }, (_, index) => (
                                     <StarIcon key={index} style={{ fontSize: 'medium', marginLeft: '0px', color: '#35633b' }} />
                                 ))}
                                 {Array.from({ length: 5 - review.rating }, (_, index) => (
                                     <StarIcon key={index + review.rating} style={{ fontSize: 'medium', marginLeft: '0px', color: '#808080' }} />
                                 ))}
-                            </p>
+                            </div>
+                        </div>
+                        <div className="bookpage-review-text">
+                            {review.review}
                         </div>
                     </div>
                 ))}
