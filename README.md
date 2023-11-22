@@ -12,6 +12,21 @@ Welcome to BookHub, a dynamic and user-friendly website designed for book enthus
 - **Reviews**: View reviews and add your own.
 - **Readlist(under development)**: Add books to your own read list
 
+## Testing
+
+- **Component testing**: Testing for HomePage and BookPage
+- **End 2 end**: End to end testing with playwright
+
+Navigate to the test folder:
+
+```
+  cd client/src/tests
+```
+and run:
+```
+  npm test
+```
+to run locally.
 ## Technology Stack
 
 ### Backend
