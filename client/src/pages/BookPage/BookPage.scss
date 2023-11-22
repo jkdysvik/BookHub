@@ -60,15 +60,6 @@
     overflow: hidden;
 }
 
-.review {
-    align-content: center;
-    padding-bottom: 10px;
-    margin-top: 20px;
-    padding-top: 10px;
-    border-radius: 5px;
-    box-shadow: 2px 5px 4px 5px #888888;
-    height: fit-content;
-}
 
 .reviewText {
     align-self: center;
@@ -81,8 +72,29 @@
 
 .bookpage-reviews-container {
     max-width: 600px;
-    margin: auto;
+    margin: o auto;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
+}
+
+.bookpage-review {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 5px 0px;
+    height: fit-content;
+    padding: 0 20px;
+}
+
+.bookpage-review-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 5px 0px;
+    width: 100%;
+    height: 20px;
 }

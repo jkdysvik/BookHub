@@ -6,6 +6,7 @@ import StarIcon from '@mui/icons-material/Star';
 import useGetReviews from "../../hooks/useGetReviews";
 import { useState } from "react";
 import { useMutation } from '@tanstack/react-query';
+import ReviewList from "./components/ReviewList";
 
 interface NewReview {
   bookID: string;
@@ -151,37 +152,26 @@ function BookPage() {
           )
         }
       </div>
-      <div id="reviewDiv">
-        <h2>Reviews</h2>
-        <div id="reviewList">
-          {dataReviews?.bookReviews.map((review) => (
-            <div className="review" key={review._id}>
-              <p>Rating: {review.rating}<StarIcon style={{ fontSize: 'medium', marginLeft: '0px', color: '#35633b' }} /></p>
-              Review: <div className="reviewText">{review.review}</div>
-              <p>Reviewer: {review.username}</p>
-            </div>
-          ))}
-        </div>
-        <div id="addReview">
-          <h2>Add review</h2>
-          <form onSubmit={
-            handleSubmit}>
-            <label htmlFor="username">Username:  </label>
-            <input type="text" name="username" id="username" value={formState.username} onChange={(e) => setFormState({ ...formState, username: e.target.value })} /> <p></p>
-            <label htmlFor="rating">Rating:  </label>
-            <input type="number" name="rating" id="rating" min="1" max="5" value={formState.rating} onChange={(e) => setFormState({ ...formState, rating: parseInt(e.target.value) })} /><p></p>
-            <label htmlFor="review">Review:  </label>
-            <textarea name="review" id="review" maxLength="100" cols="30" rows="5" value={formState.review} onChange={(e) => setFormState({ ...formState, review: e.target.value })}></textarea><p></p>
-            <button type="submit" disabled={!formState.username.trim() || !formState.review.trim()} style={{
-              backgroundColor: (!formState.username.trim() || !formState.review.trim()) ? '#ccc' : 'blue', // Example styling
-              color: 'white',
-              // other styles...
-            }}>Submit</button>
+      <ReviewList reviews={dataReviews} />
+      <div id="addReview">
+        <h2>Add review</h2>
+        <form onSubmit={
+          handleSubmit}>
+          <label htmlFor="username">Username:  </label>
+          <input type="text" name="username" id="username" value={formState.username} onChange={(e) => setFormState({ ...formState, username: e.target.value })} /> <p></p>
+          <label htmlFor="rating">Rating:  </label>
+          <input type="number" name="rating" id="rating" min="1" max="5" value={formState.rating} onChange={(e) => setFormState({ ...formState, rating: parseInt(e.target.value) })} /><p></p>
+          <label htmlFor="review">Review:  </label>
+          <textarea name="review" id="review" maxLength="100" cols="30" rows="5" value={formState.review} onChange={(e) => setFormState({ ...formState, review: e.target.value })}></textarea><p></p>
+          <button type="submit" disabled={!formState.username.trim() || !formState.review.trim()} style={{
+            backgroundColor: (!formState.username.trim() || !formState.review.trim()) ? '#ccc' : 'blue', // Example styling
+            color: 'white',
+            // other styles...
+          }}>Submit</button>
 
-          </form>
-        </div>
-        {mutation.isError && <p>Error submitting review: {mutation.error.message}</p>}
+        </form>
       </div>
+      {mutation.isError && <p>Error submitting review: {mutation.error.message}</p>}
     </div>
   );
 }
