@@ -9,11 +9,11 @@ const Pagination: FC<PaginationProps> = ({ offset, limit, setOffset, booksLen })
     return (
         <div className="homepage-scrolling-container">
             {offset >= limit && (
-                <button className="homepage-scroll-button" onClick={() => setOffset(offset - limit)}><ArrowBackIcon fontSize='small' />Previous</button>
+                <button data-testid = "previousId" className="homepage-scroll-button" onClick={() => setOffset(offset - limit)}><ArrowBackIcon fontSize='small' />Previous</button>
             )}
             <div className="homepage-index">{Math.floor(offset / limit)}</div>
             {((booksLen === limit) && (
-                <button className="homepage-scroll-button" onClick={() => setOffset(offset + limit)}>
+                <button data-testid = "nextId" className="homepage-scroll-button" onClick={() => setOffset(offset + limit)}>
                     Next <ArrowForwardIcon fontSize='small' />
                 </button>
             ))}

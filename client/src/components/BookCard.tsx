@@ -29,7 +29,7 @@ const BookCard = ({ _id, title, author, year, rating, genre, onClick }: BookCard
             onKeyDown={handleEnter}
             tabIndex={0}>
             <div className="title-div">
-                <h2 className="book-card-title">{title}</h2>
+                <h2 data-testid="book-card-title" className="book-card-title">{title}</h2>
             </div>
             <div className="book-card-rating">{rating}
                 <StarIcon style={{ fontSize: 'large', marginLeft: '5px', color: '#35633b' }} />

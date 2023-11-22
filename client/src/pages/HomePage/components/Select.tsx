@@ -25,8 +25,8 @@ const Select: FC<SelectProps> = ({ chosenGenre, chosenOrder, onChange, type }) =
             {type === "order" && (
                 <div>
                     <label htmlFor="orderBySelect">Order by:</label>
-                    <select value={chosenOrder} id='orderBySelect' onChange={onChange}>
-                        <option value="title">Title</option>
+                    <select value={chosenOrder} id='orderBySelect' data-testid="orderBySelect" onChange={onChange}>
+                        <option  value="title">Title</option>
                         <option value="author">Author</option>
                         <option value="rating">Rating</option>
                         <option value="year">Year</option>
