@@ -10,7 +10,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import FrontPageLogo from './components/FrontPageLogo.tsx';
 import Select from './components/Select.tsx';
-
+import BookCardContainer from './components/BookCardContainer.tsx';
 
 function HomePage() {
     const navigate = useNavigate();
@@ -66,6 +66,9 @@ function HomePage() {
         else
             setLogo(Logo + 1);
     }
+    const books: BookCardProps[] = searchQuery
+        ? (data as unknown as { searchBooks: BookCardProps[] }).searchBooks
+        : (data?.books as BookCardProps[])
 
 
     useEffect(() => {
@@ -150,25 +153,7 @@ function HomePage() {
                 <FrontPageLogo toggleLogo={toggleLogo} logo_num={Logo} page={Math.floor(offset / limit)} />
                 <Select chosenGenre={chosenGenre} onChange={selectGenre} type='genre' />
                 <Select chosenOrder={chosenOrder} onChange={(e: React.ChangeEvent<HTMLSelectElement>) => orderBy(e.target.value as keyof BookCardProps)} type='order' />
-                <div className="book-card-container">
-                    {(searchQuery
-                        ? (data as unknown as { searchBooks: BookCardProps[] }).searchBooks
-                        : (data?.books as BookCardProps[])
-                    )?.map((book) => (
-                        <BookCard
-                            onClick={() => handleCardClick(book._id)}
-                            title={book.title}
-                            author={book.author}
-                            year={book.year}
-                            rating={book.rating}
-                            genre={book.genre}
-                            _id={book._id}
-                            description={book.description}
-                            pages={book.pages}
-                            language={book.language}
-                        />
-                    ))}
-                </div>
+                <BookCardContainer books={books} handleCardClick={handleCardClick} />
                 <div className="homepage-scrolling-container">
                     {offset >= limit && (
                         <button className="homepage-scroll-button" onClick={() => setOffset(offset - limit)}><ArrowBackIcon fontSize='small' />Previous</button>
