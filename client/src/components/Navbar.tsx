@@ -12,9 +12,9 @@ export default function Navbar() {
     const [query, setQuery] = useState<string>("");
     const { searchQuery, setSearchQuery } = useSearch();
 
-    const handleEnter = (e) => {
+    const handleEnter = (e: KeyboardEvent) => {
         if (e.key === 'Enter') {
-            const focusedElement = document.activeElement;
+            const focusedElement = document.activeElement as HTMLElement;
             if (focusedElement) {
                 focusedElement.click();
             }
