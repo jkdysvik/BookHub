@@ -1,16 +1,7 @@
-.book-card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-}
-
 .book-card {
     height: 300px;
-    transition: all .2s ease-in-out;
     width: 150px;
+    transition: all .2s ease-in-out;
     background-color: rgb(255, 255, 255);
     border-radius: 5px;
     border-style: solid;
@@ -22,39 +13,101 @@
     &:focus {
         transform: scale(1.1);
     }
+
+    @media (max-width: 452px) {
+        height: 230px;
+        width: 115px;
+        margin: 10px;
+        padding: 5px;
+
+    }
 }
 
-.book-card.title {
-    font-size: 1px;
-    font-weight: bold;
+.book-card-title {
+    font-size: 22px;
     text-align: center;
     margin-top: 0;
     padding: 0;
+
+    @media (max-width: 452px) {
+        font-size: 18px;
+
+    }
 }
 
-.book-card.author {
-    font-size: 8px;
+.book-card-rating {
+    font-size: 18px;
     text-align: center;
-    margin: 0;
+    margin-top: 0;
     padding: 0;
+
+    @media (max-width: 452px) {
+        font-size: 14px;
+
+    }
+
 }
 
-.book-card.rating {
-    font-size: 8px;
+.book-card-author {
+    font-size: 18px;
     text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
+    margin-top: 0;
     padding: 0;
+
+    @media (max-width: 452px) {
+        font-size: 14px;
+
+    }
 }
+
+.book-card-year {
+    font-size: 18px;
+    text-align: center;
+    margin-top: 0;
+    padding: 0;
+
+    @media (max-width: 452px) {
+        font-size: 14px;
+
+    }
+
+}
+
+.book-card-genre {
+    font-size: 18px;
+    text-align: center;
+    margin-top: 0;
+    padding: 0;
+
+    @media (max-width: 452px) {
+        font-size: 14px;
+
+    }
+
+}
+
 
 .title-div {
-    min-height: 72px;
+    min-height: 6em;
     margin-bottom: 10px;
+    overflow: hidden;
+    max-height: 6em;
+
+    @media (max-width: 452px) {
+        min-height: 5em;
+        max-height: 5em;
+        margin-bottom: 5px;
+    }
 }
 
 .author-div {
     min-height: 48px;
     margin-bottom: 10px;
+    max-height: 48px;
+
+    @media (max-width: 452px) {
+        min-height: 3em;
+        max-height: 3em;
+        margin-bottom: 5px;
+    }
 }

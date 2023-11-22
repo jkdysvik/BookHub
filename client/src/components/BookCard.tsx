@@ -18,16 +18,16 @@ const BookCard = ({ _id, title, author, year, rating, genre, onClick }: BookCard
 
         <div onClick={handleClick} className="book-card">
             <div className="title-div">
-                <h2 className="book-card.title">{title}</h2>
+                <h2 className="book-card-title">{title}</h2>
             </div>
-            <div className="book-card.rating">{rating}
+            <div className="book-card-rating">{rating}
                 <StarIcon style={{ fontSize: 'large', marginLeft: '5px', color: '#35633b' }} />
             </div>
             <div className="author-div">
-                <p className="book-card.author">{author}</p>
+                <p className="book-card-author">{author}</p>
             </div>
-            <p className="book-card.year">{year}</p>
-            <p className="book-card.genre">{genre}</p>
+            <p className="book-card-year">{year}</p>
+            <p className="book-card-genre">{genre}</p>
         </div>
     );
 };

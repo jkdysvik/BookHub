@@ -1,6 +1,7 @@
-import "./Navbar.css";
+import "./Navbar.scss";
 import { ChangeEvent, useState } from "react";
 import logo from "../assets/logo.png";
+import logosmall from "../assets/logo-small.png";
 import { useNavigate } from "react-router";
 import SearchIcon from '@mui/icons-material/Search';
 import BookmarksIcon from '@mui/icons-material/Bookmarks';
@@ -19,19 +20,21 @@ export default function Navbar() {
 
     const handleSearchClick = async () => {
         if (query.trim() !== "") {
-        setSearchQuery(query);
+            setSearchQuery(query);
         }
-      };
+    };
 
     const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter" && query.trim() !== "") {
-        setSearchQuery(query);
-    }
+        if (event.key === "Enter" && query.trim() !== "") {
+            setSearchQuery(query);
+        }
     };
 
 
     const handleLogoClick = () => {
         navigate("/project2/");
+        setQuery('');
+        setSearchQuery('');
     }
 
     const handleRemoveSearch = () => {
@@ -42,6 +45,7 @@ export default function Navbar() {
     return (
         <nav className="navbar-container">
             <img onClick={handleLogoClick} className="logo" src={logo} alt="logo" />
+            <img onClick={handleLogoClick} className="logo-small" src={logosmall} alt="logo" />
             <div className="search-bar">
                 <input
                     className="search-input"
@@ -53,10 +57,10 @@ export default function Navbar() {
 
                 />
                 {searchQuery ? (
-                <button className="navbar-button" onClick={handleRemoveSearch} style={{ marginLeft: 0 }}>
-                    <ClearIcon />
-                </button>
-            ) : null}
+                    <button className="navbar-button" onClick={handleRemoveSearch} style={{ marginLeft: 0 }}>
+                        <ClearIcon />
+                    </button>
+                ) : null}
                 <button className="navbar-button" onClick={handleSearchClick}>
                     <SearchIcon />
                     <span className="navbar-button-label">Search</span>
