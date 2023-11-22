@@ -2,6 +2,13 @@
     max-width: 600px;
     margin: 90px auto;
     background-color: #fff;
+    padding: 20px;
+}
+
+.bookpage-book-container {
+    max-width: 600px;
+    margin: o auto;
+    background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
 }
@@ -70,4 +77,12 @@
     margin-left: 25%;
     overflow: visible;
     max-height: 300px;
+}
+
+.bookpage-reviews-container {
+    max-width: 600px;
+    margin: auto;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
 }
