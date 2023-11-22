@@ -1,21 +1,91 @@
 import { useParams } from "react-router-dom";
 import useGetBook from "../hooks/useGetBook";
 import "./BookPage.scss";
-import { useState } from "react";
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import StarIcon from '@mui/icons-material/Star';
+import useGetReviews from "../hooks/useGetReviews";
+import { useState } from "react";
+import { useMutation } from '@tanstack/react-query';
+
+interface NewReview {
+  bookID: string;
+  username: string;
+  rating: number;
+  review: string;
+}
+
+
+
 
 function BookPage() {
-  const { bookId } = useParams();
+  const { bookId } = useParams(); // Ensure this matches the URL parameter
+  const createReviewMutation = async (newReview: NewReview) => {
+    const query = `
+      mutation CreateReview($createReviewInput: ReviewInput) {
+        createReview(input: $createReviewInput) {
+          bookID
+          username
+          rating
+          review
+          _id
+        }
+      }
+    `;
+  
+    const response = await fetch("http://localhost:4000/graphql", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        query,
+        variables: {
+          createReviewInput: newReview,
+        },
+      }),
+    });
+  
+    if (!response.ok) {
+      throw new Error('Failed to create review');
+    }
+  
+    return response.json();
+  };
+  const mutation = useMutation(createReviewMutation);
 
-  const { isLoading, error, data } = useGetBook(bookId);
+  const [formState, setFormState] = useState<NewReview>({
+    bookID: bookId || '',
+    username: '',
+    rating: 0,
+    review: '',
+  });
+
   const [showFullDescription, setShowFullDescription] = useState(false);
+  const { data } = useGetBook(bookId);
+  const { data: dataReviews } = useGetReviews(bookId);
+  
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    console.log(formState)
+    const data : NewReview = {
+      bookID: bookId || '',
+      username: formState.username,
+      rating: formState.rating,
+      review: formState.review,
+    };
+    createReviewMutation(data)
+    .then(response => {
+      console.log('Mutation successful:', response);
+      window.location.reload();
+    })
+    .catch(error => {
+      console.error('Mutation failed:', error);
+    });
 
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
-
+    
+    
+  };
   const book = data?.book;
-
   const toggleDescription = () => {
     setShowFullDescription(!showFullDescription);
   };
@@ -79,6 +149,37 @@ function BookPage() {
           </button>
         )
       }
+    <div id="reviewDiv">
+        <h2>Reviews</h2>
+        <div id="reviewList">
+          {dataReviews?.bookReviews.map((review) => (
+            <div className="review" key={review._id}>
+              <p>Rating: {review.rating}<StarIcon style={{ fontSize: 'medium', marginLeft: '0px', color: '#35633b'}} /></p>
+              Review: <div className="reviewText">{review.review}</div>
+              <p>Reviewer: {review.username}</p>
+            </div>
+          ))}
+        </div>
+        <div id="addReview">
+          <h2>Add review</h2>
+          <form onSubmit={
+            handleSubmit}>
+            <label htmlFor="username">Username:  </label> 
+            <input type="text" name="username" id="username" value={formState.username} onChange={(e) => setFormState({...formState, username : e.target.value})} /> <p></p>
+            <label htmlFor="rating">Rating:  </label>
+            <input type="number" name="rating" id="rating" min="1" max="5" value={formState.rating} onChange={(e) => setFormState({...formState, rating : parseInt(e.target.value)})}/><p></p>
+            <label htmlFor="review">Review:  </label>
+            <textarea name="review" id="review" maxLength= "100" cols="30" rows="5" value={formState.review} onChange={(e) => setFormState({...formState, review : e.target.value})}></textarea><p></p>
+            <button type="submit" disabled={!formState.username.trim() || !formState.review.trim()} style={{
+    backgroundColor: (!formState.username.trim() || !formState.review.trim()) ? '#ccc' : 'blue', // Example styling
+    color: 'white',
+    // other styles...
+  }}>Submit</button>
+
+          </form>
+          </div>
+        {mutation.isError && <p>Error submitting review: {mutation.error.message}</p>}
+      </div>
     </div>
   );
 }

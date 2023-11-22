@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const book_1 = __importDefault(require("../models/book"));
+const review_1 = __importDefault(require("../models/review"));
 const resolvers = {
     Query: {
         async books(_, { limit, offset, genre, orderBy }) {
@@ -88,6 +89,9 @@ const resolvers = {
             ]);
             return books;
         },
+        async bookReviews(_, { bookID }) {
+            return await review_1.default.find({ bookID });
+        },
     },
     Mutation: {
         async createBook(_, { input: { title, author, year, rating, genre, description, pages, language }, }) {
@@ -118,6 +122,16 @@ const resolvers = {
             const wasDeleted = await book_1.default.findById(ID).deleteOne();
             return wasDeleted;
         },
+        async createReview(_, { input: { bookID, username, rating, review }, }) {
+            const createdReview = new review_1.default({
+                bookID,
+                username,
+                rating,
+                review,
+            });
+            const res = await createdReview.save();
+            return { id: res.id };
+        }
     },
 };
 exports.default = resolvers;
