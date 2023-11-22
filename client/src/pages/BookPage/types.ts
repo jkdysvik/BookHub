@@ -1,3 +1,4 @@
+import { UseMutationResult } from "@tanstack/react-query";
 import { ReviewProps } from "../../types/ReviewProps";
 
 export type NewReviewProps = {
@@ -10,3 +11,8 @@ export type NewReviewProps = {
 export type ReviewListProps = {
     reviews: { reviews: ReviewProps[]; } | undefined;
 };
+
+export type NewReviewFormProps = {
+    onSubmit: (event: React.FormEvent) => Promise<void>;
+    updateFormState: (newFormState: NewReviewProps) => void;
+}
