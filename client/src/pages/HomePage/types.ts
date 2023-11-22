@@ -17,3 +17,10 @@ export type BookCardContainerProps = {
     books: BookCardProps[];
     handleCardClick: (id: string) => void
 };
+
+export type PaginationProps = {
+    offset: number;
+    limit: number;
+    setOffset: (value: React.SetStateAction<number>) => void;
+    booksLen: number;
+};

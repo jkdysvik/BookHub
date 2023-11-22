@@ -1,16 +1,14 @@
 import './HomePage.scss';
 import { useEffect, useState } from 'react';
-import BookCard from '../../components/BookCard';
 import { BookCardProps } from '../../types/BookCardProps';
 import { useNavigate } from 'react-router';
 import useGetBooks from '../../hooks/useGetBooks';
 import { useSearch } from "../../hooks/searchContext";
 import useGetSearchBooks from '../../hooks/useGetSearchBooks';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import FrontPageLogo from './components/FrontPageLogo.tsx';
 import Select from './components/Select.tsx';
 import BookCardContainer from './components/BookCardContainer.tsx';
+import Pagination from './components/Pagination.tsx';
 
 function HomePage() {
     const navigate = useNavigate();
@@ -154,18 +152,7 @@ function HomePage() {
                 <Select chosenGenre={chosenGenre} onChange={selectGenre} type='genre' />
                 <Select chosenOrder={chosenOrder} onChange={(e: React.ChangeEvent<HTMLSelectElement>) => orderBy(e.target.value as keyof BookCardProps)} type='order' />
                 <BookCardContainer books={books} handleCardClick={handleCardClick} />
-                <div className="homepage-scrolling-container">
-                    {offset >= limit && (
-                        <button className="homepage-scroll-button" onClick={() => setOffset(offset - limit)}><ArrowBackIcon fontSize='small' />Previous</button>
-                    )}
-                    <div className="homepage-index">{Math.floor(offset / limit)}</div>
-                    {((data?.books && data.books.length === limit) || ((data as unknown as { searchBooks: BookCardProps[] }).searchBooks && (data as unknown as { searchBooks: BookCardProps[] }).searchBooks.length === limit)) && (
-                        <button className="homepage-scroll-button" onClick={() => setOffset(offset + limit)}>
-                            Next <ArrowForwardIcon fontSize='small' />
-                        </button>
-                    )}
-
-                </div>
+                <Pagination offset={offset} limit={limit} setOffset={setOffset} booksLen={books.length} />
             </div>
         </>
     );
