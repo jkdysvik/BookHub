@@ -19,7 +19,7 @@ const NewReviewForm: React.FC<NewReviewFormProps> = ({ onSubmit, updateFormState
     return (
         <div className="newreviewform-container">
             <h2>New review</h2>
-            <form onSubmit={onSubmit}>
+            <form className="newreviewform-form" onSubmit={onSubmit}>
                 <label htmlFor="username">Username: </label>
                 <input
                     type="text"
@@ -52,12 +52,9 @@ const NewReviewForm: React.FC<NewReviewFormProps> = ({ onSubmit, updateFormState
                 ></textarea>
                 <p></p>
                 <button
+                    className="newreviewform-submit-button"
                     type="submit"
                     disabled={!formState.username.trim() || !formState.review.trim()}
-                    style={{
-                        backgroundColor: !formState.username.trim() || !formState.review.trim() ? '#ccc' : 'blue',
-                        color: 'white',
-                    }}
                 >
                     Submit
                 </button>
