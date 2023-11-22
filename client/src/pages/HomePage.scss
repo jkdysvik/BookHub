@@ -87,6 +87,11 @@
     font-weight: bold;
 }
 
+.homepage-select-genre {
+    display: flex;
+    flex-direction: row;
+}
+
 @keyframes bounceAndMoveAndRotate {
 
     0%,
@@ -126,15 +131,15 @@
     }
 
     25% {
-        transform: translateX(-20%) translateY(-20px) rotate(-5deg);
+        transform: translateX(-20%) translateY(-35px) rotate(-8deg);
     }
 
     50% {
-        transform: translateX(0) translateY(40px);
+        transform: translateX(0) translateY(0);
     }
 
     75% {
-        transform: translateX(20%) translateY(-20px) rotate(5deg);
+        transform: translateX(20%) translateY(-35px) rotate(8deg);
     }
 
     100% {
