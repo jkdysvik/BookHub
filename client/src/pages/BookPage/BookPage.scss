@@ -102,7 +102,7 @@
 }
 
 .bookpage-review-list {
-    max-width: 600px;
+    width: 100%;
     max-height: 1000px;
 }
 
@@ -116,6 +116,7 @@
     max-height: 200px;
     background-color: white;
     border-radius: 5px;
+    max-width: 100%;
 }
 
 .bookpage-review-header {
@@ -130,10 +131,11 @@
 }
 
 .bookpage-review-text {
-    margin: 10px 10px;
-    max-width: 100%;
+    padding: 20px 20px;
+    max-width: 90%;
     height: fit-content;
-    overflow: wrap;
+    word-wrap: break-word;
+    overflow: hidden;
 }
 
 .bookpage-review-rating {
