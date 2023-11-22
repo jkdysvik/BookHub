@@ -161,7 +161,7 @@ test("should navigate to book details page when a book card is clicked", async (
   // Verify that the URL has changed, indicating navigation to the book details page
   expect(newUrl).not.toBe(initialUrl);
 
-  const bookTitle = await page.textContent(".bookPage-title");
+  const bookTitle = await page.textContent(".book-card-title");
   expect(bookTitle).toBe("CIRCUS RIDER");
 });
 

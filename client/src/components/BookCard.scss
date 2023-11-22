@@ -22,6 +22,11 @@
         padding: 5px;
 
     }
+    @media (prefers-color-scheme: dark) {
+        background-color: rgb(255, 255, 255);
+        color: black;
+        border-color: var(--border-color);
+    }
 }
 
 .book-card-title {
