@@ -26,6 +26,7 @@ and run:
 ```
   npm test
 ```
+to run locally.
 ## Technology Stack
 
 ### Backend
