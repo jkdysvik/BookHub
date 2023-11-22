@@ -54,6 +54,7 @@ Welcome to BookHub, a dynamic and user-friendly website designed for book enthus
   ```
   cd backend
   npm install
+  npm run build:server
   npm run start
   ```
 2. **Launch the Frontend Application**
