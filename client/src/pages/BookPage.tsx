@@ -186,7 +186,7 @@ function BookPage() {
           {dataReviews?.bookReviews.map((review) => (
             <div className="review" key={review._id}>
               <p>Rating: {review.rating}</p>
-              <p>Review: {review.review}</p>
+              Review: <div className="reviewText">{review.review}</div>
               <p>Reviewer: {review.username}</p>
             </div>
           ))}
@@ -195,12 +195,12 @@ function BookPage() {
           <h2>Add review</h2>
           <form onSubmit={
             handleSubmit}>
-            <label htmlFor="username">Username</label>
-            <input type="text" name="username" id="username" value={formState.username} onChange={(e) => setFormState({...formState, username : e.target.value})} />
-            <label htmlFor="rating">Rating</label>
-            <input type="number" name="rating" id="rating" min="1" max="5" value={formState.rating} onChange={(e) => setFormState({...formState, rating : parseInt(e.target.value)})}/>
-            <label htmlFor="review">Review</label>
-            <textarea name="review" id="review" cols="30" rows="10" value={formState.review} onChange={(e) => setFormState({...formState, review : e.target.value})}></textarea>
+            <label htmlFor="username">Username:  </label> 
+            <input type="text" name="username" id="username" value={formState.username} onChange={(e) => setFormState({...formState, username : e.target.value})} /> <p></p>
+            <label htmlFor="rating">Rating:  </label>
+            <input type="number" name="rating" id="rating" min="1" max="5" value={formState.rating} onChange={(e) => setFormState({...formState, rating : parseInt(e.target.value)})}/><p></p>
+            <label htmlFor="review">Review:  </label>
+            <textarea name="review" id="review" maxLength= "100" cols="30" rows="5" value={formState.review} onChange={(e) => setFormState({...formState, review : e.target.value})}></textarea><p></p>
             <button type="submit">Submit</button>
           </form>
           </div>
