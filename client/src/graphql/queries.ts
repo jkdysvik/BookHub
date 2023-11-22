@@ -1,8 +1,12 @@
-import { gql } from 'graphql-request';
-
+import { gql } from "graphql-request";
 
 export const GET_BOOKS = gql`
-  query GetBooksGenre($limit: Int, $offset: Int, $genre: String, $orderBy: String) {    
+  query GetBooksGenre(
+    $limit: Int
+    $offset: Int
+    $genre: String
+    $orderBy: String
+  ) {
     books(limit: $limit, offset: $offset, genre: $genre, orderBy: $orderBy) {
       _id
       title
@@ -17,7 +21,7 @@ export const GET_BOOKS = gql`
 export const GET_BOOK = gql`
   query Book($id: ID!) {
     book(_id: $id) {
-      _id  
+      _id
       title
       author
       year
@@ -31,8 +35,20 @@ export const GET_BOOK = gql`
 `;
 
 export const GET_SEARCH_BOOKS = gql`
-  query SearchBooks($query: String, $limit: Int, $offset: Int, $genre: String, $orderBy: String) {
-    searchBooks(query: $query, limit: $limit, offset: $offset, genre: $genre, orderBy: $orderBy) {
+  query SearchBooks(
+    $query: String
+    $limit: Int
+    $offset: Int
+    $genre: String
+    $orderBy: String
+  ) {
+    searchBooks(
+      query: $query
+      limit: $limit
+      offset: $offset
+      genre: $genre
+      orderBy: $orderBy
+    ) {
       _id
       title
       author
