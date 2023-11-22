@@ -14,8 +14,8 @@ Welcome to BookHub, a dynamic and user-friendly website designed for book enthus
 
 ## Testing
 
--**Component testing**: Testing for HomePage and BookPage
--**End 2 end**: End to end testing with playwright
+- **Component testing**: Testing for HomePage and BookPage
+- **End 2 end**: End to end testing with playwright
 
 ## Technology Stack
 
