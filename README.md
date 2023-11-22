@@ -67,5 +67,5 @@ Welcome to BookHub, a dynamic and user-friendly website designed for book enthus
 
 ## Usage
 
-Once the application is running, navigate to `http://localhost:4000` in your browser to start exploring the book collection.
+Once the application is running, navigate to `http://localhost:4000` or the corresponding link you get from "npm run dev" in your browser to start exploring the book collection.
 
