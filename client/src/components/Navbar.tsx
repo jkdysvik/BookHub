@@ -44,8 +44,8 @@ export default function Navbar() {
 
     return (
         <nav className="navbar-container">
-            <img onClick={handleLogoClick} className="logo" src={logo} alt="logo" />
-            <img onClick={handleLogoClick} className="logo-small" src={logosmall} alt="logo" />
+            <img onClick={handleLogoClick} className="logo" src={logo} alt="logo" tabIndex={0} />
+            <img onClick={handleLogoClick} className="logo-small" src={logosmall} alt="logo" tabIndex={0} />
             <div className="search-bar">
                 <input
                     className="search-input"

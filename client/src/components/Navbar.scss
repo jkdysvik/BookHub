@@ -97,6 +97,8 @@ input[type="text"] {
     cursor: pointer;
     border-radius: 5px;
     margin: 0 20px;
+    transition: outline 0.2s ease, box-shadow 0.2s ease;
+
 
     @media (max-width: 768px) {
         margin: 0 10px;
@@ -113,6 +115,7 @@ input[type="text"] {
     width: auto;
     border-radius: 5px;
     margin: 10px;
+    transition: outline 0.2s ease, box-shadow 0.2s ease;
 
     @media (max-width: 450px) {
         display: flex;
@@ -124,4 +127,6 @@ input[type="text"] {
 .logo-small:hover,
 .logo-small:focus {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    outline: black solid 2px;
+
 }
