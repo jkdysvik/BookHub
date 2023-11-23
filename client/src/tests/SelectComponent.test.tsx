@@ -53,7 +53,6 @@ describe("Select Test", () => {
           chosenOrder={chosenOrder}
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
             orderBy(e.target.value as keyof BookCardProps);
-            // Trigger a re-render with the sorted books
             renderBookCardContainer();
           }}
           type="order"
@@ -66,9 +65,7 @@ describe("Select Test", () => {
 
   const renderBookCardContainer = () => {
     const container = document.getElementById("bookCardContainer");
-    // Render BookCardContainer inside the container div
     if (container) {
-      // Render BookCardContainer inside the container div
       render(
         <BookCardContainer books={sortedBooks} handleCardClick={() => {}} />,
         { container },
@@ -79,24 +76,16 @@ describe("Select Test", () => {
   test("Check if order changes on selecting title", async () => {
     renderHomePage();
 
-    // Fire change event on select
     fireEvent.change(screen.getByTestId("orderBySelect"), {
       target: { value: "title" },
     });
 
-    // Wait for the state to update and UI to re-render
     await waitFor(() => {
-      // Get all the book titles
       const bookTitles = screen
         .getAllByTestId("book-card-title")
         .map((title) => title.textContent);
-      // Check if the first book title is 'Harry Potter'
       expect(bookTitles[0]).toBe("Harry Potter");
-      // Optionally, you can check the order of all books
       expect(bookTitles).toEqual(["Harry Potter", "Star Wars"]);
     });
-
-    // Debug to see the current state of the DOM (optional)
-    screen.debug();
   });
 });
