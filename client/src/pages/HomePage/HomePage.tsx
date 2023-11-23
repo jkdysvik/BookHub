@@ -40,8 +40,8 @@ function HomePage() {
   });
 
   const { error, data, isLoading } = searchQuery
-    ? useGetSearchBooks(searchQuery, offset, chosenGenre, chosenOrder, limit)
-    : useGetBooks(offset, chosenGenre, chosenOrder, limit);
+    ? useGetSearchBooks(limit, searchQuery, offset, chosenGenre, chosenOrder)
+    : useGetBooks(limit, offset, chosenGenre, chosenOrder);
 
   const handleEnter = (e: KeyboardEvent) => {
     if (e.key === "Enter") {

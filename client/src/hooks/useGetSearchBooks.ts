@@ -11,7 +11,10 @@ export default function useGetSearchBooks(
   chosenOrder?: string,
 ) {
   const queryResult = useQuery({
-    queryKey: ["books", { limit, searchQuery, offset, chosenGenre, chosenOrder }],
+    queryKey: [
+      "books",
+      { limit, searchQuery, offset, chosenGenre, chosenOrder },
+    ],
     queryFn: async () => {
       const data = await request<{ books: BookCardProps[] }>(
         "http://localhost:4000/graphql",

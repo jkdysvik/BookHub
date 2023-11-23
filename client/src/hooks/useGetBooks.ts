@@ -4,10 +4,10 @@ import { useQuery } from "@tanstack/react-query";
 import { BookCardProps } from "../types/BookCardProps";
 
 export default function useGetBooks(
+  limit: number,
   offset: number,
   chosenGenre: string,
   chosenOrder: string,
-  limit: number,
 ) {
   const queryResult = useQuery({
     queryKey: ["book", { offset, chosenGenre, chosenOrder, limit }],

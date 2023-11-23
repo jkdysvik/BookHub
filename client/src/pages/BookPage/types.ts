@@ -12,7 +12,7 @@ export type NewReviewProps = {
 };
 
 export type ReviewListProps = {
-  reviews: { reviews: ReviewResponse; } | undefined;
+  reviews: { bookReviews: ReviewResponse } | undefined;
 };
 
 export type NewReviewFormProps = {

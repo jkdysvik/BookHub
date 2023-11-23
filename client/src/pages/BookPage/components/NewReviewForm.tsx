@@ -49,9 +49,9 @@ const NewReviewForm: React.FC<NewReviewFormProps> = ({
         <textarea
           name="review"
           id="review"
-          maxLength="100"
-          cols="30"
-          rows="5"
+          maxLength={100}
+          cols={30}
+          rows={5}
           value={formState.review}
           onChange={(e) =>
             setFormState({ ...formState, review: e.target.value })
