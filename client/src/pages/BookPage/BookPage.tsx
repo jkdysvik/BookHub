@@ -100,6 +100,7 @@ function BookPage() {
       }
     }
   };
+  console.log(dataReviews);
 
   return (
     <div className="bookpage-container">

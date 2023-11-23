@@ -20,7 +20,7 @@ const NewReviewForm: React.FC<NewReviewFormProps> = ({
   return (
     <div className="newreviewform-container">
       <h2>New review</h2>
-      <form className="newreviewform-form" onSubmit={onSubmit}>
+      <form className="newreviewform-form" onSubmit={onSubmit} data-testid="formTest">
         <label htmlFor="username">Username: </label>
         <input
           type="text"
