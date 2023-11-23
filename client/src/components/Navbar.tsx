@@ -63,7 +63,6 @@ export default function Navbar() {
     <nav className="navbar-container">
       <img
         onClick={handleLogoClick}
-        onKeyDown={handleEnter}
         className="logo"
         src={logo}
         alt="logo"

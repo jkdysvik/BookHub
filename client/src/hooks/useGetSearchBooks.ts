@@ -4,14 +4,14 @@ import { useQuery } from "@tanstack/react-query";
 import { BookCardProps } from "../types/BookCardProps";
 
 export default function useGetSearchBooks(
+  limit: number,
   searchQuery?: string,
   offset?: number,
   chosenGenre?: string,
   chosenOrder?: string,
-  limit: number,
 ) {
   const queryResult = useQuery({
-    queryKey: ["books", { searchQuery, offset, chosenGenre, chosenOrder }],
+    queryKey: ["books", { limit, searchQuery, offset, chosenGenre, chosenOrder }],
     queryFn: async () => {
       const data = await request<{ books: BookCardProps[] }>(
         "http://localhost:4000/graphql",

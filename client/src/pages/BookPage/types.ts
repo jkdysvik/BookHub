@@ -1,5 +1,9 @@
 import { ReviewProps } from "../../types/ReviewProps";
 
+export type ReviewResponse = {
+  bookReviews: ReviewProps[];
+};
+
 export type NewReviewProps = {
   bookID: string;
   username: string;
@@ -8,7 +12,7 @@ export type NewReviewProps = {
 };
 
 export type ReviewListProps = {
-  reviews: { reviews: ReviewProps[] } | undefined;
+  reviews: { reviews: ReviewResponse; } | undefined;
 };
 
 export type NewReviewFormProps = {
