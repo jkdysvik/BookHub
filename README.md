@@ -41,12 +41,18 @@ Welcome to BookHub, a dynamic and user-friendly website designed for book enthus
 1. **Start the server**
   ```
   cd server
-  npm run build:server
+  npm run dev:server
+  ```
+  After you recive this respond:
+  >"Found 0 errors. Watching for file changes."
+   
+ you can stop the process and run the following:
+  ```
   npm run start
   ```
 2. **Launch the Frontend Application**
 ```
-  cd frontend
+  cd client
   npm run dev
   ```
 
@@ -62,7 +68,7 @@ If you want to interact directly with the database, navigate to `http://localhos
 - **Component testing**: Testing for HomePage and BookPage
 - **End 2 end**: End to end testing with playwright
 
-Make sure the project is running locally. Navigate to the client folder for the tests
+Make sure the project is running locally, both server and client. Navigate to the client folder for the tests
 
 To run the Component tests:
 ```
