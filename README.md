@@ -19,6 +19,7 @@ Welcome to BookHub, a dynamic and user-friendly website designed for book enthus
 - Node.js
 - MongoDB
 
+
 ### Installation
 
 1. **Clone the Repository**
@@ -36,7 +37,7 @@ Welcome to BookHub, a dynamic and user-friendly website designed for book enthus
   npm install
   ```
 
-### Running the Application
+## Running the Application
 
 1. **Start the server**
   ```
@@ -55,6 +56,16 @@ Welcome to BookHub, a dynamic and user-friendly website designed for book enthus
   cd client
   npm run dev
   ```
+## Before creating a new merge request
+Before creating a new merge request, the following commands should be run locally to verify that the application works:
+
+
+`npm run build` - builds the application
+
+`npm run lint` - checks for any bad code that potentially will cause errors
+
+`npm run prettier` - formats the code
+
 
 ## Usage
 
@@ -77,14 +88,62 @@ To run the Component tests:
 To run the end-2-end tests:
 ```
   npm run test:e2e
+
 ```
+
+##Project structure
+
+### Client
+
+This folder contains all frontend code. It contains:
+
+
+- Routes: containing all pages. Each page has a tsx file and a css file.
+
+- Components: The different types of components are gathered in their own folder.
+
+- Tests: containing snapshot tests and component tests.
+
+- Hooks: Contains hooks used to connect the backend to the frontend
+
+- Queries: Contains all queries we use to communicate with GraphQL
+
+
+Frontend technologies
+
+
+- Node.js
+
+- Npm
+
+- Vite
+
+- React Typescript
+
+
+### Server
+
+This folder contains backend code. It contains the index.ts file that sets up the Apollo-server.
+
+- [graphql]: contains resolvers.ts and typeDefs.ts.
+- [models]: contains MongoDB schemas for books and reviews
 
 ## Technology Stack
 
 ### Backend
 
-- **MongoDB**: Our database choice for efficient data storage and retrieval.
 - **GraphQL**: A query language for our API, offering flexibility and efficiency in data operations.
+
+- **Apollo Server**: open-source, spec-compliant GraphQL server
+
+## Database
+
+### Technologies
+
+- MongoDB 
+- Mongoose
+
+
 
 ### Frontend
 
@@ -92,4 +151,9 @@ To run the end-2-end tests:
 - **Context API**: Used for managing the application state within React, ensuring efficient data handling.
 - **TanStack Query**: A powerful, performant, and flexible fetching library for React, replacing Apollo Client. It manages server state, caching, synchronization, and more.
 
+#Contributors
+
+- Aksel Hodne Hanisch
+- Jonathan Kvalvaag Dysvik
+- Christian Li Sivertsen
 
